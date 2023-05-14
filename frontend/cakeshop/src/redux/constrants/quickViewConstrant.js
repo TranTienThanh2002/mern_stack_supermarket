@@ -1,0 +1,3 @@
+const SHOW_QUICK_VIEW = "SHOW_QUICK_VIEW"
+
+export {SHOW_QUICK_VIEW}
