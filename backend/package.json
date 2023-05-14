@@ -29,5 +29,8 @@
     "util": "^0.12.5",
     "util.promisify": "^1.1.2"
   },
-  "proxy": "http://localhost:5000/api"
+  "proxy": "http://localhost:5000/api",
+  "engines": {
+    "node": ">=14 <15"
+  }
 }
