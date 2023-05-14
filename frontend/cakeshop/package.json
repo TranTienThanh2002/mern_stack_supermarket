@@ -71,7 +71,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/api",
+  "proxy": "https://super-market-2ebn.onrender.com/api",
   "devDependencies": {
     "assert": "^2.0.0",
     "crypto-browserify": "^3.12.0",

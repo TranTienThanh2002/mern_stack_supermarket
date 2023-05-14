@@ -29,7 +29,7 @@
     "util": "^0.12.5",
     "util.promisify": "^1.1.2"
   },
-  "proxy": "http://localhost:5000/api",
+  "proxy": "https://super-market-2ebn.onrender.com/api",
   "engines": {
     "node": ">=16 "
   }
