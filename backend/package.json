@@ -31,6 +31,6 @@
   },
   "proxy": "http://localhost:5000/api",
   "engines": {
-    "node": ">=14 <15"
+    "node": ">=16 "
   }
 }
