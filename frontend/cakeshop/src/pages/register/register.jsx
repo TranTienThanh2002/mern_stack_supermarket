@@ -19,7 +19,7 @@ export const Register = () => {
     e.preventDefault();
     try {
       const newUser = { ...info };
-      await axios.post("/users", newUser);
+      await axios.post("https://super-market-2ebn.onrender.com/api/users", newUser);
       setMessage("Please verify account");
     } catch (error) {
       console.log("at register" + error);
@@ -42,8 +42,8 @@ export const Register = () => {
           photos: data.picture,
           refreshToken: tokenResponse.access_token
         }
-        await axios.post("/users/createUserWithGG", newUser);
-        var { data }= await axios.post("/users/login", newUser);
+        await axios.post("https://super-market-2ebn.onrender.com/api/users/createUserWithGG", newUser);
+        var { data }= await axios.post("https://super-market-2ebn.onrender.com/api/users/login", newUser);
         
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("users", newUser.email);
@@ -53,7 +53,7 @@ export const Register = () => {
             X_authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
         };
-        var { data } = await axios.get(`/users/get/${newUser.email}`, config);
+        var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${newUser.email}`, config);
         loginUser(data);
         navigate("/");
       } catch (error) {console.log("sign up: ", error)}

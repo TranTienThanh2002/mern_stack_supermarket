@@ -19,12 +19,12 @@ export const ProductImage = ({ imageUrl, id }) => {
     showQuickView(id, true);
   };
   const handleCompareClick = async() => {
-    const { data } = await axios.get(`/product/${id}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
       addToCompare(data);
       navigate("/compare");
   };
   const handleWishlistClick = async() => {
-    const { data } = await axios.get(`/product/${id}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
     addWishlist(data);
   };
 

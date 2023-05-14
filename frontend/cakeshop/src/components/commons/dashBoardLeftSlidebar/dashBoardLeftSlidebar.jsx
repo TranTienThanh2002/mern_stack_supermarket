@@ -32,7 +32,7 @@ export const DashBoardLeftSlideBar = ({
     try {
       // var { data } = await axios.get(`/users/get/${email}`, config);
       // setData(data);
-      var { data } = await axios.get(`/store/getStore/${store._id}`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/store/getStore/${store._id}`);
       setStore(data);
     } catch (error) {
       throw error;
@@ -41,7 +41,7 @@ export const DashBoardLeftSlideBar = ({
   const handleChangeAvatar = async (e) => {
     setImages(e.target.files);
     try {
-      await axios.post(`/store/deleteImage/${store._id}`);
+      await axios.post(`https://super-market-2ebn.onrender.com/api/store/deleteImage/${store._id}`);
       const list = await Promise.all(
         Object.values(e.target.files).map(async (image) => {
           const data = new FormData();
@@ -60,7 +60,7 @@ export const DashBoardLeftSlideBar = ({
         photos: list[0],
       };
 
-      await axios.put(`/store/updateStore/${store._id}`, photosStore);
+      await axios.put(`https://super-market-2ebn.onrender.com/api/store/updateStore/${store._id}`, photosStore);
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useFetch();
     } catch (error) {

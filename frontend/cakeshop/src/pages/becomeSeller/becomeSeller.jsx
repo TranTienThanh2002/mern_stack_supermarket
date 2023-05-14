@@ -19,7 +19,7 @@ export const BecomeSeller = () => {
   const email = localStorage.getItem("users");
   const useFetch = async () => {
     try {
-      let { data } = await axios.get(`/users/get/${email}`, config);
+      let { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
       setData(data);
     } catch (error) {
       throw error;
@@ -44,7 +44,7 @@ export const BecomeSeller = () => {
       info,
     };
     try {
-      await axios.post(`/store/`, store, config);
+      await axios.post(`https://super-market-2ebn.onrender.com/api/store/`, store, config);
       handleClose();
       navigate("/dashboard");
     } catch (error) {

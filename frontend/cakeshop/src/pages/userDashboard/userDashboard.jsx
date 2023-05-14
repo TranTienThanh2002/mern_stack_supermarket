@@ -49,7 +49,7 @@ export const UserDashboard = () => {
   const email = localStorage.getItem("users");
   const useFetch = async () => {
     try {
-      let { data } = await axios.get(`/users/get/${email}`, config);
+      let { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
       setData(data);
       setLoading(true)
     } catch (error) {
@@ -58,7 +58,7 @@ export const UserDashboard = () => {
   };
   const getOrders = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    let { data } = await axios.get(`/cart/getAllCartByUser/${email}`);
+    let { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`);
     setListOrder(data);
   };
   useEffect(() => {
@@ -91,7 +91,7 @@ export const UserDashboard = () => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const handleSaveChangeClick = async (e) => {
-    await axios.put(`/users/update/${data.id}`, info);
+    await axios.put(`https://super-market-2ebn.onrender.com/api/users/update/${data.id}`, info);
     setShow(false);
   };
   const handleChangePasswordClick = async (e) => {
@@ -102,7 +102,7 @@ export const UserDashboard = () => {
         newPassword: passWord,
         oldPassword: oldPassWord,
       };
-      await axios.put(`/users/changePassWord/${data.id}`, passwords);
+      await axios.put(`https://super-market-2ebn.onrender.com/api/users/changePassWord/${data.id}`, passwords);
       setShowChangePassword(false);
       setMessage("");
     }
@@ -110,7 +110,7 @@ export const UserDashboard = () => {
   const handleChangeAvatar = async (e) => {
     setImages(e.target.files);
     try {
-      await axios.post(`/users/deleteImage/${data.id}`);
+      await axios.post(`https://super-market-2ebn.onrender.com/api/users/deleteImage/${data.id}`);
       const list = await Promise.all(
         Object.values(e.target.files).map(async (image) => {
           const data = new FormData();
@@ -129,7 +129,7 @@ export const UserDashboard = () => {
         photos: list[0],
       };
 
-      await axios.put(`/users/update/${data.id}`, photosUser);
+      await axios.put(`https://super-market-2ebn.onrender.com/api/users/update/${data.id}`, photosUser);
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useFetch();
     } catch (error) {
@@ -137,7 +137,7 @@ export const UserDashboard = () => {
     }
   };
   const refetchAllCart = async () => {
-    const { data } = await axios.get(`/cart/getAllCartByUser/${email}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`);
     let OrderPending = 0;
     const total = data.map((item) => {
       if (item.status === "PENDING") {

@@ -20,7 +20,7 @@ export const Login = () => {
     try {
       const newUser = { ...info };
 
-      var { data } = await axios.post("/users/login", newUser);
+      var { data } = await axios.post("https://super-market-2ebn.onrender.com/api/users/login", newUser);
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("users", info.email);
       const config = {
@@ -30,7 +30,7 @@ export const Login = () => {
         },
       };
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      var { data } = await axios.get(`/users/get/${newUser.email}`, config);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${newUser.email}`, config);
       loginUser(data);
       navigate("/");
     } catch (error) {
@@ -54,7 +54,7 @@ export const Login = () => {
           verifyCode: data.verified_email,
           refreshToken: tokenResponse.access_token
         }
-        var { data }= await axios.post("/users/login", newUser);
+        var { data }= await axios.post("https://super-market-2ebn.onrender.com/api/users/login", newUser);
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("users", newUser.email);
         const config = {
@@ -63,7 +63,7 @@ export const Login = () => {
             X_authorization: "Bearer " + localStorage.getItem("accessToken"),
           },
         };
-        var { data } = await axios.get(`/users/get/${newUser.email}`, config);
+        var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${newUser.email}`, config);
         loginUser(data);
         navigate("/");
       } catch (error) {console.log("login: ", error)}

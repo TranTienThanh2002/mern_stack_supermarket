@@ -9,7 +9,7 @@ export const OrderSuccess = () => {
   const [status, setStatus] = useState("");
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const { data } = useFetch(`/cart/getCartById/${id}`);
+  const { data } = useFetch(`https://super-market-2ebn.onrender.com/api/cart/getCartById/${id}`);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -21,14 +21,14 @@ export const OrderSuccess = () => {
       status: status,
       userId: user.id
     }
-    const {data} = await axios.put(`/cart/updateStatus/${id}`,body)
+    const {data} = await axios.put(`https://super-market-2ebn.onrender.com/api/cart/updateStatus/${id}`,body)
     setStatus(data.status)
   }
   useEffect(()=>{},[status])
   useEffect(() => {
     const getUser = async () => {
       const { data } = await axios.get(
-        `/users/get/${localStorage.getItem("users")}`,
+        `https://super-market-2ebn.onrender.com/api/users/get/${localStorage.getItem("users")}`,
         config
       );
       setUser(data);

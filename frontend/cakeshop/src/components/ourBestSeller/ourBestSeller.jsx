@@ -5,7 +5,7 @@ import { TrendingProductCard } from "../commons/trendingProductCard/trendingProd
 import { BiLeaf } from "react-icons/bi";
 import useFetch from "../../hooks/useFetch";
 export const OurBestSeller = () => {
-  const { data } = useFetch(`/product/get/productTopSales/limit/12`);
+  const { data } = useFetch(`https://super-market-2ebn.onrender.com/api/product/get/productTopSales/limit/12`);
   var settings = {
     dots: true,
     infinite: data.length > 4,

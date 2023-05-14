@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
 import { BsBox } from "react-icons/bs";
 import { Rating } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ export const UserOrders = () => {
   };
   const refetchAllCart = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data } = await axios.get(`/cart/getAllCartByUser/${email}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`);
     setAllCart(data);
   };
   useEffect(() => {
@@ -31,7 +30,7 @@ export const UserOrders = () => {
         limit: limit,
         email: email
       };
-      const { data } = await axios.post("/cart/getPageCartByEmail", fillerCart);
+      const { data } = await axios.post("https://super-market-2ebn.onrender.com/api/cart/getPageCartByEmail", fillerCart);
       setDatas(data);
     };
     getAllCart();

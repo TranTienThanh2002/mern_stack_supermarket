@@ -116,7 +116,7 @@ export const AddNewProduct = ({ show, setShow , store}) => {
         storeId: store._id
       };
 
-      await axios.post("/product", newProduct);
+      await axios.post("https://super-market-2ebn.onrender.com/api/product", newProduct);
       setShow(false)
     } catch (error) {
       console.log(error);

@@ -20,7 +20,7 @@ export const Profiles = ({ store ,setStore}) => {
   const handleSaveChangeClick = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/store/updateStore/${store._id}`, info);
+      const { data } = await axios.put(`https://super-market-2ebn.onrender.com/api/store/updateStore/${store._id}`, info);
       setStores(data);
       setStore(data);
       handleClose();

@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { CategoryMenu } from "../commons/categoryMenu/categoryMenu";
 import { TrendingProductCard } from "../commons/trendingProductCard/trendingProductCard";
-import product23 from "../../assets/images/vegetable/product/23.png";
-import product24 from "../../assets/images/vegetable/product/24.png";
-import product25 from "../../assets/images/vegetable/product/25.png";
-import product26 from "../../assets/images/vegetable/product/26.png";
 import banner8 from "../../assets/images/vegetable/banner/8.jpg";
 import banner11 from "../../assets/images/vegetable/banner/11.jpg";
-import review1 from "../..//assets/images/vegetable/review/1.jpg";
 import axios from "axios";
 import { useFillterProductContext } from "../../redux/contexts/filterProductContext/filterProductContext";
 import { useNavigate } from "react-router-dom";
 export const Sticky = () => {
   const [topSale, setTopSale] = useState([]);
   const getTopSales = async () => {
-    const { data } = await axios.get("/product/get/productTopSales");
+    const { data } = await axios.get("https://super-market-2ebn.onrender.com/api/product/get/productTopSales");
     setTopSale(data);
   };
   const { addTag,tags,removeTag } = useFillterProductContext();

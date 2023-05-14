@@ -19,8 +19,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useWishListContext } from "../../../redux/contexts/wishlistContext/wishlistContext";
 import { useUserContext } from "../../../redux/contexts/loginContext/loginContext";
 import axios from "axios";
-import { Rating } from "@mui/material";
-import useFetch from "../../../hooks/useFetch";
 import { useFillterProductContext } from "../../../redux/contexts/filterProductContext/filterProductContext";
 import { MdClose } from "react-icons/md";
 
@@ -41,7 +39,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
         X_authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     };
-    await axios.get("/users/logout", config);
+    await axios.get("https://super-market-2ebn.onrender.com/api/users/logout", config);
     localStorage.setItem("accessToken", "");
     localStorage.removeItem("users");
     logout();
@@ -71,7 +69,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
     document.querySelector(".search-full").classList.remove("open");
   };
   const getListProduct = async () => {
-    const { data } = await axios.get(`/product/search/${keySearch}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/search/${keySearch}`);
     setProducts(data);
   };
   const redirect = () => {
@@ -96,7 +94,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
             },
           };
           const { data } = await axios.get(
-            `/users/get/${localStorage.getItem("users")}`,
+            `https://super-market-2ebn.onrender.com/api/users/get/${localStorage.getItem("users")}`,
             config
           );
           setUsers(data);

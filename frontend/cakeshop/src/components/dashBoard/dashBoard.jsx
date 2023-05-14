@@ -21,7 +21,6 @@ import { Profiles } from "../../sellers/profiles/profiles";
 import { Settings } from "../../sellers/settings/settings";
 // import { faker } from '@faker-js/faker';
 import axios from "axios";
-import useFetch from "../../hooks/useFetch";
 
 ChartJS.register(
   ArcElement,
@@ -72,10 +71,10 @@ export const DashBoard = () => {
   const email = localStorage.getItem("users");
   const useFetchs = async () => {
     try {
-      var { data } = await axios.get(`/users/get/${email}`, config);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
       setUserId(data.id);
       const storeId = data.store;
-      var { data } = await axios.get(`/store/getStore/${storeId}`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/store/getStore/${storeId}`);
       setStore(data);
     } catch (error) {
       throw error;
@@ -83,7 +82,7 @@ export const DashBoard = () => {
   };
   
   const refetchAllCart = async () => {
-    const { data } = await axios.get(`/cart/getAllCart/`, config);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCart/`, config);
     let OrderPending = 0;
     let OrderCancel = 0;
     let OrderSuccess = 0;

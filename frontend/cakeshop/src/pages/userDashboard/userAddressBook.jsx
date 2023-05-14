@@ -20,8 +20,8 @@ export const UserAddressBook = ({ id }) => {
       info,
     };
     try {
-      await axios.post(`/address/`, address);
-      const { data } = await axios.get(`/address/getByUserId/${id}`);
+      await axios.post(`https://super-market-2ebn.onrender.com/api/address/`, address);
+      const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/address/getByUserId/${id}`);
       setListAddress(data);
       setShow(false);
     } catch (error) {
@@ -31,7 +31,7 @@ export const UserAddressBook = ({ id }) => {
   const handleEditClick = async (e, addressId) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(`/address/gets/${addressId}`);
+      const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/address/gets/${addressId}`);
 
       setData(data);
     } catch (error) {
@@ -42,7 +42,7 @@ export const UserAddressBook = ({ id }) => {
   const handleUpdateClick = async (e, addressId) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/address/update/${addressId}`, info);
+      const { data } = await axios.put(`https://super-market-2ebn.onrender.com/api/address/update/${addressId}`, info);
       setData(data);
     } catch (error) {
       throw error;
@@ -55,9 +55,9 @@ export const UserAddressBook = ({ id }) => {
       userId: id,
     };
     try {
-      await axios.delete(`/address/delete/${addressId}`);
-      await axios.put(`/address/deleteAddressInUser/${addressId}`, userId);
-      const { data } = await axios.get(`/address/getByUserId/${id}`);
+      await axios.delete(`https://super-market-2ebn.onrender.com/api/address/delete/${addressId}`);
+      await axios.put(`https://super-market-2ebn.onrender.com/api/address/deleteAddressInUser/${addressId}`, userId);
+      const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/address/getByUserId/${id}`);
       setListAddress(data);
     } catch (error) {
       console.log("remove address" + error);
@@ -67,7 +67,7 @@ export const UserAddressBook = ({ id }) => {
   useEffect(() => {
     const useFetch = async () => {
       try {
-        const { data } = await axios.get(`/address/getByUserId/${id}`);
+        const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/address/getByUserId/${id}`);
         setListAddress(data);
       } catch (error) {
         throw error;

@@ -1,9 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export const Settings = ({store, userId}) => {
-  const navigate = useNavigate();
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +10,7 @@ export const Settings = ({store, userId}) => {
   };
   const handleClickDeleteAccount = async() => {
 
-    await axios.delete(`/store/deleteStore/${store._id}/${userId}`, config)
+    await axios.delete(`https://super-market-2ebn.onrender.com/api/store/deleteStore/${store._id}/${userId}`, config)
     // navigate('/')
   }
   return (

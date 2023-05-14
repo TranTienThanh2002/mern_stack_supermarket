@@ -79,7 +79,7 @@ export const LeftBox = ({ setData, setShowFilterMobile, showFilterMobile }) => {
         rating: rating,
       };
       try {
-        const { data } = await axios.post("/product/filter/", filterProduct);
+        const { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/filter/", filterProduct);
         setData(data);
       } catch (error) {
         console.log(error.message);

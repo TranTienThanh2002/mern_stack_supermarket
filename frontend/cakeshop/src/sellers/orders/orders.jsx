@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { usePaginationOfSellerContext } from "../../redux/contexts/paginationOfSeller/paginationOfSeller";
 import { PaginationBasic } from "../../components/pagination/paginationOfSeller";
@@ -21,7 +20,7 @@ export const Orders = () => {
     navigate(`/orderSuccess/${id}`);
   }
   const refetchAllCart = async () => {
-    const { data } = await axios.get(`/cart/getAllCart/`,config);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCart/`,config);
     setAllCart(data);
   };
   const refetchAllCartByKeySearch = async () => {
@@ -30,7 +29,7 @@ export const Orders = () => {
       limit: limit,
       key: keySearch,
     };
-    const { data } = await axios.post(`/cart/getAllCartByKeySearch/`,fillerCart);
+    const { data } = await axios.post(`https://super-market-2ebn.onrender.com/api/cart/getAllCartByKeySearch/`,fillerCart);
     setAllCart(data);
   };
   const handleSearchKey = (key) => {
@@ -55,7 +54,7 @@ export const Orders = () => {
         limit: limit,
         key: keySearch,
       };
-      const { data } = await axios.post("/cart/getPageCart", fillerCart,config);
+      const { data } = await axios.post("https://super-market-2ebn.onrender.com/api/cart/getPageCart", fillerCart,config);
       setDatas(data);
     };
     getAllCart();

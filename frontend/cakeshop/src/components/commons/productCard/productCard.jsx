@@ -4,7 +4,7 @@ import { ProductDetails } from "./productDetails";
 import { ProductImage } from "./productImage";
 import useFetch from "../../../hooks/useFetch";
 export const ProductCard = ({ id }) => {
-  const { data, loading, error } = useFetch(`/product/${id}`);
+  const { data, loading, error } = useFetch(`https://super-market-2ebn.onrender.com/api/product/${id}`);
   return (
     <>
       {data.hasOwnProperty("productname") && (

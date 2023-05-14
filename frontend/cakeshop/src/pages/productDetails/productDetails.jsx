@@ -46,7 +46,7 @@ export const ProductDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const { data, loading, error } = useFetch(`/product/${id}`);
+  const { data, loading, error } = useFetch(`https://super-market-2ebn.onrender.com/api/product/${id}`);
   const { page, limit, setPage } = usePaginationOfSellerContext();
   const itemWeight = useRef();
   const itemTabDes = useRef();
@@ -75,20 +75,20 @@ export const ProductDetails = () => {
       limit: limit,
     };
     const { data } = await axios.post(
-      `/comment/getPageComment/${id}`,
+      `https://super-market-2ebn.onrender.com/api/comment/getPageComment/${id}`,
       fillerCart
     );
     setPageComment(data);
   };
   const handleCompareClick = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get(`/product/${id}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
     addToCompare(data);
     navigate("/compare");
   };
   const handleWishlistClick = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get(`/product/${id}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
     addWishlist(data);
   };
   const handleClickTabDes = () => {
@@ -118,7 +118,7 @@ export const ProductDetails = () => {
         user: JSON.stringify(userComment),
         productId: id,
       };
-      await axios.post("/comment/", comment);
+      await axios.post("https://super-market-2ebn.onrender.com/api/comment/", comment);
       getRating();
     } catch (error) {
       console.log("post comment failed: " + error);
@@ -133,7 +133,7 @@ export const ProductDetails = () => {
         user: userComment.id,
         commentId: commentId,
       };
-      await axios.put("/comment/replyComment", comment);
+      await axios.put("https://super-market-2ebn.onrender.com/api/comment/replyComment", comment);
       getRating();
     } catch (error) {
       console.log("post reply failed: " + error);
@@ -143,11 +143,11 @@ export const ProductDetails = () => {
   const email = localStorage.getItem("users");
   const useFetchs = async () => {
     try {
-      var { data } = await axios.get(`/users/get/${email}`, config);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
       setUserId(data.id);
       setUserComment(data);
       const storeId = data.store;
-      var { data } = await axios.get(`/store/getStore/${storeId}`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/store/getStore/${storeId}`);
       setStore(data);
     } catch (error) {
       throw error;
@@ -155,29 +155,29 @@ export const ProductDetails = () => {
   };
 
   const getTopSales = async () => {
-    const { data } = await axios.get("/product/get/productTopSales");
+    const { data } = await axios.get("https://super-market-2ebn.onrender.com/api/product/get/productTopSales");
     setTopSale(data);
   };
   const getRating = async () => {
-    var { data } = await axios.get(`/comment/getAllComment/${id}`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getAllComment/${id}`);
     let all = data.length;
     setAllComment(data);
     if (data.length === 0) {
       all = 1;
     }
-    var { data } = await axios.get(`/comment/getRatingComment/${id}/1`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/1`);
     const one = data.length;
     setStar1((one / all).toFixed(2) * 100);
-    var { data } = await axios.get(`/comment/getRatingComment/${id}/2`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/2`);
     const two = data.length;
     setStar2((two / all).toFixed(2) * 100);
-    var { data } = await axios.get(`/comment/getRatingComment/${id}/3`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/3`);
     const three = data.length;
     setStar3((three / all).toFixed(2) * 100);
-    var { data } = await axios.get(`/comment/getRatingComment/${id}/4`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/4`);
     const four = data.length;
     setStar4((four / all).toFixed(2) * 100);
-    var { data } = await axios.get(`/comment/getRatingComment/${id}/5`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/5`);
     const five = data.length;
     setStar5((five / all).toFixed(2) * 100);
     const average = (
@@ -208,8 +208,8 @@ export const ProductDetails = () => {
       const comment = {
         productId: id,
       };
-      await axios.delete(`/comment/deleteComment/${commentId}`);
-      await axios.post(`/comment/deleteCommentInProduct/${commentId}`, comment);
+      await axios.delete(`https://super-market-2ebn.onrender.com/api/comment/deleteComment/${commentId}`);
+      await axios.post(`https://super-market-2ebn.onrender.com/api/comment/deleteCommentInProduct/${commentId}`, comment);
       // eslint-disable-next-line react-hooks/rules-of-hooks
       getRating();
     } catch (error) {
@@ -222,8 +222,8 @@ export const ProductDetails = () => {
         commentId: commentId,
       };
 
-      await axios.post(`/comment/deleteReplyInComment/${replyId}`, comment);
-      await axios.delete(`/comment/deleteReply/${replyId}`);
+      await axios.post(`https://super-market-2ebn.onrender.com/api/comment/deleteReplyInComment/${replyId}`, comment);
+      await axios.delete(`https://super-market-2ebn.onrender.com/api/comment/deleteReply/${replyId}`);
       // eslint-disable-next-line react-hooks/rules-of-hooks
       getRating();
     } catch (error) {
@@ -236,7 +236,7 @@ export const ProductDetails = () => {
         ...info,
         commentId: commentId,
       };
-      await axios.put("/comment/updateComment/", comment);
+      await axios.put("https://super-market-2ebn.onrender.com/api/comment/updateComment/", comment);
       getRating();
     } catch (error) {
       console.log("post comment failed: " + error);

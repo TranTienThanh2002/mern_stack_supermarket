@@ -12,7 +12,7 @@ export const ResetPassword = () => {
   useEffect(() => {
     const useFetch = async () => {
       try {
-        const { data } = await axios.get(`/users/gets/${email}`);
+        const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/gets/${email}`);
         setData(data);
       } catch (error) {
         throw error;
@@ -30,7 +30,7 @@ export const ResetPassword = () => {
             const passwords = {
               newPassword: passWord,
             };
-            await axios.put(`/users/resetPassWord/${data.id}`, passwords);
+            await axios.put(`https://super-market-2ebn.onrender.com/api/users/resetPassWord/${data.id}`, passwords);
             setMessage("Reset Password successfully!");
           }
     } catch (error) {

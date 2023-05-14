@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { ProductImage } from "../commons/productCard/productImage";
 import { ProductDetails } from "../commons/productCard/productDetails";
-import product1 from "../../assets/images/vegetable/product/1.png";
 import axios from "axios";
 export const RelateProduct = ({ tag }) => {
   const [data, setData] = useState([]);
@@ -44,7 +43,7 @@ export const RelateProduct = ({ tag }) => {
     const tags = {
       tags: tag,
     };
-    const { data } = await axios.post("/product/relateProduct", tags);
+    const { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/relateProduct", tags);
     setData(data);
   };
   useEffect(() => {

@@ -14,14 +14,14 @@ export const Search = () => {
   const [datas, setDatas] = useState([]);
   const { page, limit, setPage } = usePaginationSearchContext();
   const { data, loading, error, reFetch } = useFetch(
-    `/product/limitSearch/${limit}/${key}`
+    `https://super-market-2ebn.onrender.com/api/product/limitSearch/${limit}/${key}`
   );
   const refetchData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     setDatas(data);
   };
   const getProducts = async () => {
-    const { data } = await axios.get(`/product/search/${key}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/search/${key}`);
     setProducts(data);
   };
   const handleSearchKey = (key) => {
@@ -40,7 +40,7 @@ export const Search = () => {
         limit: limit,
         key: key,
       };
-      const { data } = await axios.post("/product/searchByKey", fillerProduct);
+      const { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/searchByKey", fillerProduct);
       setDatas(data);
     };
     getAllProduct();

@@ -14,7 +14,7 @@ export const UserProfile = ({profile, setProfile}) => {
   const email = localStorage.getItem("users");
   const useFetch = async () => {
     try {
-      let { data } = await axios.get(`/users/get/${email}`, config);
+      let { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
       setData(data);
     } catch (error) {
       throw error;

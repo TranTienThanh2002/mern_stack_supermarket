@@ -16,7 +16,7 @@ export const Checkout = () => {
   defineElement(lottie.loadAnimation);
   const { cart, setTotalItems, total_items, fee_shipping,removeItem } = useCartContext();
   const email = localStorage.getItem("users");
-  const { data, loading } = useFetch(`/address/getByEmail/${email}`);
+  const { data, loading } = useFetch(`https://super-market-2ebn.onrender.com/api/address/getByEmail/${email}`);
   const navigate = useNavigate();
   var settings = {
     dots: true,
@@ -68,7 +68,7 @@ export const Checkout = () => {
       },
     };
     try {
-      const {data}= await axios.post("/cart/", order, config);
+      const {data}= await axios.post("https://super-market-2ebn.onrender.com/api/cart/", order, config);
       localStorage.removeItem("CartStore");
       cart.map((item) => {
         return removeItem(item.id)

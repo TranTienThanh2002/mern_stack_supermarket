@@ -19,7 +19,7 @@ export const EditProduct = ({ show, setShow, id, store }) => {
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
   const [dataList, setDataList] = useState({});
-  const { data, loading, error, reFetch } = useFetch(`/product/${id}`);
+  const { data, loading, error, reFetch } = useFetch(`https://super-market-2ebn.onrender.com/api/product/${id}`);
   useEffect(() => {
     setNav1(slider1);
     setNav2(slider2);
@@ -105,7 +105,7 @@ export const EditProduct = ({ show, setShow, id, store }) => {
       let editProduct = {};
 
       if (images !== "") {
-        await axios.post(`/product/deleteImage/${id}`);
+        await axios.post(`https://super-market-2ebn.onrender.com/api/product/deleteImage/${id}`);
         const list = await Promise.all(
           Object.values(images).map(async (image) => {
             const data = new FormData();
@@ -134,7 +134,7 @@ export const EditProduct = ({ show, setShow, id, store }) => {
         };
       }
 
-      await axios.put(`/product/update/${id}`, editProduct);
+      await axios.put(`https://super-market-2ebn.onrender.com/api/product/update/${id}`, editProduct);
       setShow(false);
     } catch (error) {
       console.log("editProduct " + error);

@@ -7,7 +7,7 @@ export const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const handleClick = async (e) => {
     e.preventDefault();
-    await axios.get(`/users/reset/${email}`);
+    await axios.get(`https://super-market-2ebn.onrender.com/api/users/reset/${email}`);
     setMessage("Send email successfully!")
   };
   return (

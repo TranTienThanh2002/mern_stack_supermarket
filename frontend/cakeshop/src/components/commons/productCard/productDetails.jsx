@@ -14,20 +14,20 @@ export const ProductDetails = ({ item, spanName, unit, background }) => {
   };
   const { addToCart } = useCartContext();
   const getRating = async () => {
-    var { data } = await axios.get(`/comment/getAllComment/${item._id}`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getAllComment/${item._id}`);
     let all = data.length;
     if (data.length === 0) {
       all=1;
     }
-    var { data } = await axios.get(`/comment/getRatingComment/${item._id}/1`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${item._id}/1`);
       const one = data.length;
-      var { data } = await axios.get(`/comment/getRatingComment/${item._id}/2`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${item._id}/2`);
       const two = data.length;
-      var { data } = await axios.get(`/comment/getRatingComment/${item._id}/3`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${item._id}/3`);
       const three = data.length;
-      var { data } = await axios.get(`/comment/getRatingComment/${item._id}/4`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${item._id}/4`);
       const four = data.length;
-      var { data } = await axios.get(`/comment/getRatingComment/${item._id}/5`);
+      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${item._id}/5`);
       const five = data.length;
       const average = (
         (one + two * 2 + three * 3 + four * 4 + five * 5) /

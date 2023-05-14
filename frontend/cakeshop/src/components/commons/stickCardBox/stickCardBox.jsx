@@ -26,7 +26,7 @@ export const StickCardBox = ({ data, quantity, setQuantity }) => {
   window.addEventListener("scroll", toggleVisible);
   const handleWishlistClick = async (e, id) => {
     e.preventDefault();
-    const { data } = await axios.get(`/product/${id}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
     addWishlist(data);
   };
   return (

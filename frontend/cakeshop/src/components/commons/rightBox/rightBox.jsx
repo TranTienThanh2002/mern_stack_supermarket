@@ -31,7 +31,7 @@ export const RightBox = ({
     document.querySelector("li.type-columns.active").classList.remove("active");
     document.querySelector(`li.${element}`).classList.add("active");
   };
-  const { data, loading, error, reFetch } = useFetch("/product");
+  const { data, loading, error, reFetch } = useFetch("https://super-market-2ebn.onrender.com/api/product");
   const handleFillter = async (string) => {
     if (string === "Low - High Price") {
       sortBys({
@@ -68,7 +68,7 @@ export const RightBox = ({
           limit: limit,
         };
         const { data } = await axios.post(
-          "/product/getPageProducts",
+          "https://super-market-2ebn.onrender.com/api/product/getPageProducts",
           fillerProduct
         );
         setDatas(data);
@@ -89,7 +89,7 @@ export const RightBox = ({
         limit: limit,
       };
       const { data } = await axios.post(
-        "/product/fillTerAllProducts",
+        "https://super-market-2ebn.onrender.com/api/product/fillTerAllProducts",
         filterProduct
       );
       setProducts(data);
@@ -108,29 +108,29 @@ export const RightBox = ({
         limit: limit,
       };
       if (sortBy.sortBy["tag"] === "productname") {
-        var { data } = await axios.post("/product/filter/name", fillterProduct);
+        var { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/filter/name", fillterProduct);
         setDatas(data);
         var { data } = await axios.post(
-          "/product/filter/fillTerAllProductsSortName",
+          "https://super-market-2ebn.onrender.com/api/product/filter/fillTerAllProductsSortName",
           fillterProduct
         );
         setProducts(data);
       } else if (sortBy.sortBy["tag"] === "price") {
         var { data } = await axios.post(
-          "/product/filter/price",
+          "https://super-market-2ebn.onrender.com/api/product/filter/price",
           fillterProduct
         );
         setDatas(data);
         var { data } = await axios.post(
-          "/product/filter/fillTerAllProductsSortPrice",
+          "https://super-market-2ebn.onrender.com/api/product/filter/fillTerAllProductsSortPrice",
           fillterProduct
         );
         setProducts(data);
       } else {
-        var { data } = await axios.post("/product/filter/", fillterProduct);
+        var { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/filter/", fillterProduct);
         setDatas(data);
         var { data } = await axios.post(
-          "/product/fillTerAllProducts/",
+          "https://super-market-2ebn.onrender.com/api/product/fillTerAllProducts/",
           fillterProduct
         );
         setProducts(data);

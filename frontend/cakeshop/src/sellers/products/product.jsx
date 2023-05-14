@@ -20,7 +20,7 @@ export const Product = () => {
   const [keySearch, setKeySearch] = useState("");
   const [store, setStore] = useState([]);
   const { page, limit, setPage } = usePaginationOfSellerContext();
-  const { data, loading, error, reFetch } = useFetch(`/product/limit/${limit}`);
+  const { data, loading, error, reFetch } = useFetch(`https://super-market-2ebn.onrender.com/api/product/limit/${limit}`);
   const refetchData = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     setDatas(data);
@@ -34,15 +34,15 @@ export const Product = () => {
 
   const email = localStorage.getItem("users");
   const refetchAllProduct = async () => {
-    var { data } = await axios.get(`/users/get/${email}`, config);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
     const storeId = data.store;
-    var { data } = await axios.get(`/store/getStore/${storeId}`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/store/getStore/${storeId}`);
     setStore(data)
-    var { data } = await axios.get(`/product/`);
+    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/`);
     setAllProducts(data);
   };
   const handleClickDelete = async (id) => {
-    await axios.delete(`/product/delete/${id}/${store._id}`);
+    await axios.delete(`https://super-market-2ebn.onrender.com/api/product/delete/${id}/${store._id}`);
     reFetch();
   };
   const handleClickEdit = (id) => {
@@ -54,7 +54,7 @@ export const Product = () => {
     setKeySearch(key);
   };
   const getProducts = async () => {
-    const { data } = await axios.get(`/product/search/${keySearch}`);
+    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/search/${keySearch}`);
     setAllProducts(data);
   };
   const getProductsSearchInSeller = async () => {
@@ -63,7 +63,7 @@ export const Product = () => {
       limit: limit,
       key: keySearch,
     };
-    const { data } = await axios.post(`/product/seller/search/`, fillerProduct);
+    const { data } = await axios.post(`https://super-market-2ebn.onrender.com/api/product/seller/search/`, fillerProduct);
     setDatas(data);
   };
   useEffect(() => {
@@ -81,7 +81,7 @@ export const Product = () => {
         limit: limit,
         key: keySearch,
       };
-      const { data } = await axios.post("/product/seller", fillerProduct);
+      const { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/seller", fillerProduct);
       setDatas(data);
     };
     getAllProduct();
