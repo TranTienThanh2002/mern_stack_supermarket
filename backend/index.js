@@ -51,6 +51,13 @@ app.use((err, req, res, next)=>{
     })
 })
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static("../frontend/cakeshop/build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve("../frontend", 'cakeshop', "build", "index.html"))
+    })
+}
+
 app.listen(5000, ()=>{
     console.log("5000")
 })
