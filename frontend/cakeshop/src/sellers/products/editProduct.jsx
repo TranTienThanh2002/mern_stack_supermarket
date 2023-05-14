@@ -3,8 +3,7 @@ import axios from "axios";
 import { FaPen } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { Ckeditor } from "../../components/ckeditor/ckeditor";
 import useFetch from "../../hooks/useFetch";
 

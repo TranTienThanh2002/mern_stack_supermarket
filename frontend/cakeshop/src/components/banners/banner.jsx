@@ -1,6 +1,4 @@
 import React from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import banner4 from "../../assets/images/vegetable/banner/4.jpg";
 import banner5 from "../../assets/images/vegetable/banner/5.jpg";
