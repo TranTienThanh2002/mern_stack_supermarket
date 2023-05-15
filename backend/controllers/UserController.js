@@ -1163,7 +1163,7 @@ export const Verify = async (req, res, next) => {
       }
     );
     // res.status(200).json(updatedUser);
-    res.redirect("https://nimble-phoenix-ccd0ed.netlify.app/");
+    res.redirect("https://bejewelled-eclair-5a4618.netlify.app/");
   } catch (error) {
     next(error);
   }
