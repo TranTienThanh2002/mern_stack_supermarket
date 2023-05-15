@@ -370,7 +370,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
                                 <>
                                   {(users.hasOwnProperty("store") &&
                                     users.store !== "") ||
-                                  user[0].user.store ? (
+                                  user[0]?.user.store ? (
                                     <li class="product-box-contain">
                                       <Link to="/dashboard">
                                         Seller Dashboard
