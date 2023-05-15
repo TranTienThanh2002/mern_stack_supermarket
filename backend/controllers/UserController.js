@@ -1164,7 +1164,7 @@ export const Verify = async (req, res, next) => {
       }
     );
     // res.status(200).json(updatedUser);
-    res.redirect("https://candid-eclair-3dd2d2.netlify.app/login");
+    res.redirect("https://candid-eclair-3dd2d2.netlify.app");
   } catch (error) {
     next(error);
   }
