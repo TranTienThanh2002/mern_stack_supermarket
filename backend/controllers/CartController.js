@@ -304,7 +304,7 @@ export const createCart = async (req, res, next) => {
                                                             style="font-size: 14px;margin:
                                                             0;line-height: 1.5;color:
                                                             #939393;font-weight: 500;">${
-                                                              (address.address)
+                                                              (address)
                                                             }</p>
                                                     </div>
                                                 </td>
