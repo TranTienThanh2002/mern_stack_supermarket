@@ -44,6 +44,7 @@ const ProductSchema = mongoose.Schema({
     },
     photos: {
         type: [String],
+        default: "https://res.cloudinary.com/dthybdbt9/image/upload/v1684126205/imagenotfound_r0puxe.jpg"
     },
     sales:{
         type: Number,
