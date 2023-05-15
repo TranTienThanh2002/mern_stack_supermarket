@@ -237,7 +237,7 @@ export const createCart = async (req, res, next) => {
                                                     href="https://themes.pixelstrap.com/fastkart/front-end/index.html"
                                                     style="display: block; text-align:
                                                     left;">
-                                                    <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png"
+                                                    <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" style="width:100px; height: 18px;"
                                                         class="main-logo" alt="logo">
                                                 </a>
                                             </td>

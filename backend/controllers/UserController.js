@@ -306,7 +306,7 @@ export const resetPassword = async (req, res, next) => {
                             style="background-color: #f7f7f7;display: flex;align-items: center;justify-content: space-between;width: 100%;">
                             <td class="header-logo" style="padding: 10px 32px;">
                                 <a href="https://themes.pixelstrap.com/fastkart/front-end/index.html" style="display: block; text-align: left;">
-                                    <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" class="main-logo" alt="logo">
+                                    <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" style="width:100px; height: 18px;" class="main-logo" alt="logo">
                                 </a>
                             </td>
                             
@@ -614,7 +614,7 @@ export const createUser = async (req, res, next) => {
                               width: 100%;">
                                   <td class="header-logo" style="padding: 10px 32px;">
                                       <a href="" style="display: block; text-align: left;">
-                                          <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" class="main-logo" alt="logo">
+                                          <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" style="width:100px; height: 18px;" class="main-logo" alt="logo">
                                       </a>
                                   </td>
                               </tr>
@@ -776,7 +776,7 @@ export const createUserWithGG = async (req, res, next) => {
       const savedUser = await newUser.save();
       sendMail(
         email,
-        "Verify Email",
+        "Welcome to Supermarket",
         `<!DOCTYPE html>
       <html lang="en">
       
@@ -916,7 +916,7 @@ export const createUserWithGG = async (req, res, next) => {
                               width: 100%;">
                                   <td class="header-logo" style="padding: 10px 32px;">
                                       <a href="" style="display: block; text-align: left;">
-                                          <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" class="main-logo" alt="logo">
+                                          <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" style="width:100px; height: 18px;" class="main-logo" alt="logo">
                                       </a>
                                   </td>
                               </tr>
@@ -948,19 +948,8 @@ export const createUserWithGG = async (req, res, next) => {
                                               style="font-size: 14px;font-weight: 600;width: 82%;margin: 8px auto 0;line-height: 1.5;color: #939393;font-family: 'Nunito Sans', sans-serif;">
                                               We hope our product will lead you, like many other before you. to a place where
                                               yourideas where your ideas can spark and grow.n a place where you’ll find all
-                                              your inspiration needs. before we get started, we’ll need to verify your email.
+                                              your inspiration needs.
                                           </p>
-                                      </td>
-                                  </tr>
-                              </thead>
-                          </table>
-      
-                          <table class="button-table" style="margin: 34px 0;" align="center" border="0" cellpadding="0"
-                              cellspacing="0" width="100%">
-                              <thead>
-                                  <tr style="display: block;">
-                                      <td style="display: block;">
-                                          <a href="${process.env.APP_URL}/users/verify/${email}"class="password-button" style="color: white;">Verify Email</a>
                                       </td>
                                   </tr>
                               </thead>
