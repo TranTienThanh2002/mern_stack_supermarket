@@ -237,7 +237,7 @@ export const createCart = async (req, res, next) => {
                                                     href="https://themes.pixelstrap.com/fastkart/front-end/index.html"
                                                     style="display: block; text-align:
                                                     left;">
-                                                    <img src="https://themes.pixelstrap.com/fastkart/email-templete/images/logo.png"
+                                                    <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png"
                                                         class="main-logo" alt="logo">
                                                 </a>
                                             </td>
@@ -474,7 +474,7 @@ export const createCart = async (req, res, next) => {
                                           <tr>
                                               <td>
                                                   <h4 style="font-size: 19px; font-weight: 700; margin: 0;">Shop For <span
-                                                          class="theme-color">Fastkart</span></h4>
+                                                          class="theme-color">Supermarket</span></h4>
                                               </td>
                                           </tr>
                                       </table>

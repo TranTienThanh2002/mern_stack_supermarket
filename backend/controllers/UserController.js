@@ -306,7 +306,7 @@ export const resetPassword = async (req, res, next) => {
                             style="background-color: #f7f7f7;display: flex;align-items: center;justify-content: space-between;width: 100%;">
                             <td class="header-logo" style="padding: 10px 32px;">
                                 <a href="https://themes.pixelstrap.com/fastkart/front-end/index.html" style="display: block; text-align: left;">
-                                    <img src="https://themes.pixelstrap.com/fastkart/email-templete/images/logo.png" class="main-logo" alt="logo">
+                                    <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" class="main-logo" alt="logo">
                                 </a>
                             </td>
                             
@@ -353,7 +353,7 @@ export const resetPassword = async (req, res, next) => {
                         <thead>
                             <tr style="display: block;">
                                 <td style="display: block;">
-                                    <a href="http://localhost:3000/resetpassword/${email}" class="password-button" style="color: white;">Set a new password</a>
+                                    <a href="https://candid-eclair-3dd2d2.netlify.app/resetpassword/${email}" class="password-button" style="color: white;">Set a new password</a>
                                 </td>
                             </tr>
                         </thead>
@@ -384,7 +384,7 @@ export const resetPassword = async (req, res, next) => {
                                           <tr>
                                               <td>
                                                   <h4 style="font-size: 19px; font-weight: 700; margin: 0;">Shop For <span
-                                                          class="theme-color">Fastkart</span></h4>
+                                                          class="theme-color">Supermarket</span></h4>
                                               </td>
                                           </tr>
                                       </table>
@@ -614,7 +614,7 @@ export const createUser = async (req, res, next) => {
                               width: 100%;">
                                   <td class="header-logo" style="padding: 10px 32px;">
                                       <a href="" style="display: block; text-align: left;">
-                                          <img src="https://themes.pixelstrap.com/fastkart/email-templete/images/logo.png" class="main-logo" alt="logo">
+                                          <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" class="main-logo" alt="logo">
                                       </a>
                                   </td>
                               </tr>
@@ -638,7 +638,7 @@ export const createUser = async (req, res, next) => {
                                       <td style="display: block;">
                                           <h3
                                               style="font-weight: 700; font-size: 20px; margin: 0; text-transform: uppercase;">
-                                              Hi ${savedUser.fullName} And Welcome To Fastkart.!</h3>
+                                              Hi ${savedUser.fullName} And Welcome To Supermarket.!</h3>
                                       </td>
       
                                       <td>
@@ -671,7 +671,7 @@ export const createUser = async (req, res, next) => {
                                           <p
                                               style="font-size: 14px; font-weight: 600; width: 82%; margin: 0 auto; line-height: 1.5; color: #939393; font-family: 'Nunito Sans', sans-serif;">
                                               If you have any question, please email us at <span
-                                                  class="theme-color">Fastkart@example.com</span> or vixit our <span
+                                                  class="theme-color">supermarket@gmail.com</span> or vixit our <span
                                                   class="theme-color">FAQs.</span> You can also chat with a real live human
                                               during our operating hours. they can answer questions about account or help you
                                               with your meditation practice.</p>
@@ -690,7 +690,7 @@ export const createUser = async (req, res, next) => {
                                           <tr>
                                               <td>
                                                   <h4 style="font-size: 19px; font-weight: 700; margin: 0;">Shop For <span
-                                                          class="theme-color">Fastkart</span></h4>
+                                                          class="theme-color">Supermarket</span></h4>
                                               </td>
                                           </tr>
                                       </table>
@@ -916,7 +916,7 @@ export const createUserWithGG = async (req, res, next) => {
                               width: 100%;">
                                   <td class="header-logo" style="padding: 10px 32px;">
                                       <a href="" style="display: block; text-align: left;">
-                                          <img src="https://themes.pixelstrap.com/fastkart/email-templete/images/logo.png" class="main-logo" alt="logo">
+                                          <img src="https://res.cloudinary.com/dthybdbt9/image/upload/v1684120775/SUPERMARKET_b10j87.png" class="main-logo" alt="logo">
                                       </a>
                                   </td>
                               </tr>
@@ -940,7 +940,7 @@ export const createUserWithGG = async (req, res, next) => {
                                       <td style="display: block;">
                                           <h3
                                               style="font-weight: 700; font-size: 20px; margin: 0; text-transform: uppercase;">
-                                              Hi ${savedUser.fullName} And Welcome To Fastkart.!</h3>
+                                              Hi ${savedUser.fullName} And Welcome To Supermarket.!</h3>
                                       </td>
       
                                       <td>
@@ -973,7 +973,7 @@ export const createUserWithGG = async (req, res, next) => {
                                           <p
                                               style="font-size: 14px; font-weight: 600; width: 82%; margin: 0 auto; line-height: 1.5; color: #939393; font-family: 'Nunito Sans', sans-serif;">
                                               If you have any question, please email us at <span
-                                                  class="theme-color">Fastkart@example.com</span> or vixit our <span
+                                                  class="theme-color">supermarket@gmail.com</span> or vixit our <span
                                                   class="theme-color">FAQs.</span> You can also chat with a real live human
                                               during our operating hours. they can answer questions about account or help you
                                               with your meditation practice.</p>
@@ -992,7 +992,7 @@ export const createUserWithGG = async (req, res, next) => {
                                           <tr>
                                               <td>
                                                   <h4 style="font-size: 19px; font-weight: 700; margin: 0;">Shop For <span
-                                                          class="theme-color">Fastkart</span></h4>
+                                                          class="theme-color">Supermarket</span></h4>
                                               </td>
                                           </tr>
                                       </table>
@@ -1175,7 +1175,7 @@ export const Verify = async (req, res, next) => {
       }
     );
     // res.status(200).json(updatedUser);
-    res.redirect("http://localhost:3000/login");
+    res.redirect("https://candid-eclair-3dd2d2.netlify.app/login");
   } catch (error) {
     next(error);
   }

@@ -6,7 +6,7 @@ import useFetch from "../../hooks/useFetch";
 import { BiLeaf } from "react-icons/bi";
 export const TopSaveToday = () => {
   const [items, setItems] = useState([]);
-  const { data, loading, error, reFetch } = useFetch("/product");
+  const { data, loading, error, reFetch } = useFetch("https://super-market-2ebn.onrender.com/api/product");
   var settings = {
     dots: true,
     infinite: items.length > 3,

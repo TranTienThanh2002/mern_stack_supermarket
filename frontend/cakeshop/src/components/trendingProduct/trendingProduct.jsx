@@ -3,7 +3,7 @@ import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 export const TrendingProduct = () => {
-  const { data } = useFetch("/product/get/productTopSales");
+  const { data } = useFetch("https://super-market-2ebn.onrender.com/api/product/get/productTopSales");
   const navigate = useNavigate()
   const handleClick = (id)=>{
     navigate(`/product/${id}`)

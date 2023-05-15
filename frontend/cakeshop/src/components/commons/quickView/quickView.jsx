@@ -7,7 +7,7 @@ import { MdClose } from "react-icons/md";
 
 export const QuickView = () => {
   const { id, quickView, showQuickView } = useQuickViewContext();
-  const { data, loading, error } = useFetch(`/product/${id}`);
+  const { data, loading, error } = useFetch(`https://super-market-2ebn.onrender.com/api/product/${id}`);
   const navigate = useNavigate();
   const handleClick = () => {
     showQuickView(id, false)
