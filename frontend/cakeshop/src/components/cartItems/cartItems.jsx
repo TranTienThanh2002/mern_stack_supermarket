@@ -1,44 +1,50 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { useCartContext } from "../../redux/contexts/cartContexts/cartContext";
 import { Link } from "react-router-dom";
-
-export const CartItems = ({ item,subTotal, setSubTotal }) => {
+import { NotificationManager } from "react-notifications";
+export const CartItems = ({ item, subTotal, setSubTotal }) => {
   const [quantity, setQuantity] = useState(Number(item.amount));
-  const {removeItem, setTotalItems} = useCartContext()
+  const { removeItem, setTotalItems } = useCartContext();
   const plusAmount = (item) => {
     item.amount += 1;
     setQuantity(item.amount);
-    setSubTotal(subTotal + item.product.discount)
-    setTotalItems(((subTotal + item.product.discount).toFixed(1)))
+    setSubTotal(subTotal + item.product.discount);
+    setTotalItems((subTotal + item.product.discount).toFixed(1));
   };
   const minusAmount = (item) => {
     item.amount -= 1;
-    
+
     setQuantity(item.amount);
-    
-    setSubTotal(subTotal - item.product.discount)
-    setTotalItems((subTotal - item.product.discount).toFixed(1))
+
+    setSubTotal(subTotal - item.product.discount);
+    setTotalItems((subTotal - item.product.discount).toFixed(1));
   };
   const toggledAmount = (amount, item) => {
     item.amount = amount;
-    if(amount< quantity){
-        setSubTotal(subTotal - (quantity - amount) * item.product.discount)
-        setTotalItems((subTotal - (quantity - amount) * item.product.discount).toFixed(1))
-        setQuantity(item.amount);
+    if (amount < quantity) {
+      setSubTotal(subTotal - (quantity - amount) * item.product.discount);
+      setTotalItems(
+        (subTotal - (quantity - amount) * item.product.discount).toFixed(1)
+      );
+      setQuantity(item.amount);
+    } else {
+      setSubTotal(subTotal + (amount - quantity) * item.product.discount);
+      setTotalItems(
+        (subTotal + (amount - quantity) * item.product.discount).toFixed(1)
+      );
+      setQuantity(item.amount);
     }
-    else {
-        setSubTotal(subTotal + (amount-quantity) * item.product.discount)
-        setTotalItems((subTotal + (amount-quantity) * item.product.discount).toFixed(1))
-        setQuantity(item.amount);
-    }
-    
-    
   };
-  const reMoveItemHandles = (id, item)=>{
-    setSubTotal(subTotal - (item.product.discount*item.amount));
+  const reMoveItemHandles = (id, item) => {
+    setSubTotal(subTotal - item.product.discount * item.amount);
     removeItem(id);
-  }
+    NotificationManager.success(
+      "Remove item success",
+      "Cart products",
+      2000
+    );
+  };
   //   useEffect(()=>{},[quantity])
   return (
     <>
@@ -128,7 +134,10 @@ export const CartItems = ({ item,subTotal, setSubTotal }) => {
 
         <td className="save-remove">
           <h4 className="table-title text-content">Action</h4>
-          <Link className="remove close_button" onClick={()=>reMoveItemHandles(item.id, item)}>
+          <Link
+            className="remove close_button"
+            onClick={() => reMoveItemHandles(item.id, item)}
+          >
             Remove
           </Link>
         </td>

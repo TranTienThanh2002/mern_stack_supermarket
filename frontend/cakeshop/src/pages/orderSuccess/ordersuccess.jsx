@@ -3,7 +3,7 @@ import { BreadCrumb } from "../../components/commons/breadCrumb/breadCrumb";
 import useFetch from "../../hooks/useFetch";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-
+import { NotificationManager } from "react-notifications";
 export const OrderSuccess = () => {
   const [user, setUser] = useState([]);
   const [status, setStatus] = useState("");
@@ -21,8 +21,22 @@ export const OrderSuccess = () => {
       status: status,
       userId: user.id
     }
-    const {data} = await axios.put(`https://super-market-2ebn.onrender.com/api/cart/updateStatus/${id}`,body)
-    setStatus(data.status)
+    try {
+      
+      const {data} = await axios.put(`https://super-market-2ebn.onrender.com/api/cart/updateStatus/${id}`,body)
+      setStatus(data.status)
+      NotificationManager.success(
+        "Update status successfully!",
+        "Orders",
+        2000
+      );
+    } catch (error) {
+      NotificationManager.error(
+        "Update status failed!",
+        "Orders",
+        2000
+      );
+    }
   }
   useEffect(()=>{},[status])
   useEffect(() => {

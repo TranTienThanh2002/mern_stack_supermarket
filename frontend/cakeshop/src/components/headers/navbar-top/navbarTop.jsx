@@ -21,7 +21,7 @@ import { useUserContext } from "../../../redux/contexts/loginContext/loginContex
 import axios from "axios";
 import { useFillterProductContext } from "../../../redux/contexts/filterProductContext/filterProductContext";
 import { MdClose } from "react-icons/md";
-
+import { NotificationManager } from "react-notifications";
 export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
   const { cart } = useCartContext();
   const { setKey } = useFillterProductContext();
@@ -39,12 +39,21 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
         X_authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     };
-    await axios.get("https://super-market-2ebn.onrender.com/api/users/logout", config);
-    localStorage.setItem("accessToken", "");
-    localStorage.removeItem("users");
-    logout();
-    setLogOuts(true);
-    navigate("/");
+    try {
+      await axios.get(
+        "https://super-market-2ebn.onrender.com/api/users/logout",
+        config
+      );
+      localStorage.setItem("accessToken", "");
+      localStorage.removeItem("users");
+      logout();
+      setLogOuts(true);
+      NotificationManager.success("Logout successfully!", "Logout", 2000);
+      navigate("/");
+    } catch (error) {
+      NotificationManager.error("Logout failed!", "Logout", 2000);
+      console.log(error);
+    }
   };
   const handleSearchKey = (key) => {
     setKeySearch(key);
@@ -69,7 +78,9 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
     document.querySelector(".search-full").classList.remove("open");
   };
   const getListProduct = async () => {
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/search/${keySearch}`);
+    const { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/product/search/${keySearch}`
+    );
     setProducts(data);
   };
   const redirect = () => {
@@ -94,7 +105,9 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
             },
           };
           const { data } = await axios.get(
-            `https://super-market-2ebn.onrender.com/api/users/get/${localStorage.getItem("users")}`,
+            `https://super-market-2ebn.onrender.com/api/users/get/${localStorage.getItem(
+              "users"
+            )}`,
             config
           );
           setUsers(data);
@@ -102,7 +115,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
           setLogOuts(false);
         }
       } catch (error) {
-        console.log("load page");
+        console.log("load page: ", error);
       }
     };
     getUser();
@@ -280,7 +293,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
 
                         <div class="onhover-div">
                           <ul class="cart-list">
-                            {cart.map((item, index) => (
+                            {cart.slice(0, 3).map((item, index) => (
                               <li class="product-box-contain" key={index}>
                                 <div class="drop-cart">
                                   <Link
@@ -318,7 +331,7 @@ export const NavbarTop = ({ setShowNavBarMobile, showNavBarMobile }) => {
 
                           <div class="button-group">
                             <Link to="/cart" class="btn btn-sm cart-button">
-                              View Cart
+                              {cart.length > 3 ? "View more" : "View Cart"}
                             </Link>
                             {cart.length > 0 && (
                               <Link

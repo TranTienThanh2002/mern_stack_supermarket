@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
-
+import { NotificationManager } from "react-notifications";
 export const Profiles = ({ store ,setStore}) => {
   const [info, setInfo] = useState([]);
   const [stores, setStores] = useState(store);
@@ -23,8 +23,18 @@ export const Profiles = ({ store ,setStore}) => {
       const { data } = await axios.put(`https://super-market-2ebn.onrender.com/api/store/updateStore/${store._id}`, info);
       setStores(data);
       setStore(data);
+      NotificationManager.success(
+        "Update profile successfully!",
+        "Profiles",
+        2000
+      );
       handleClose();
     } catch (error) {
+      NotificationManager.success(
+        "Update profile failed!",
+        "Profiles",
+        2000
+      );
       console.log("update store failed: " + error);
     }
   };

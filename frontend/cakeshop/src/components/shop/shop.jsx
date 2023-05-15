@@ -21,7 +21,7 @@ export const Shop = ({setLoading}) => {
             </div>
         </div>
     </section>
-    <div class={showFilterMobile?"bg-overlay show":"bg-overlay"}></div>
+    <div class={showFilterMobile?"bg-overlay show":"bg-overlay"} onClick={()=>setShowFilterMobile(false)}></div>
     </>
   )
 }

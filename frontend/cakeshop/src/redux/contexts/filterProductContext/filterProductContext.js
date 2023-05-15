@@ -20,7 +20,7 @@ const initialState = {
   rating: [],
   discount: [],
   packSize: [],
-  sortBy: { tag: "_id", sort: 1 },
+  sortBy: {sortBy: { tag: "_id", sort: 1 }},
   page: 1,
   limit: 12,
   key: "",

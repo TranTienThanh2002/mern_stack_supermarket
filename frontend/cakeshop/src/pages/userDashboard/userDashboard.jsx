@@ -13,7 +13,12 @@ import { FaPen } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { useWishListContext } from "../../redux/contexts/wishlistContext/wishlistContext";
+import countriesData from "../../countryAndStates.json";
+import { NotificationManager } from "react-notifications";
 export const UserDashboard = () => {
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedState, setSelectedState] = useState("");
   const [dashboard, setDashBoard] = useState(true);
   const [order, setOrder] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
@@ -49,16 +54,21 @@ export const UserDashboard = () => {
   const email = localStorage.getItem("users");
   const useFetch = async () => {
     try {
-      let { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
+      let { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/users/get/${email}`,
+        config
+      );
       setData(data);
-      setLoading(true)
+      setLoading(true);
     } catch (error) {
       throw error;
     }
   };
   const getOrders = async () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    let { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`);
+    let { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`
+    );
     setListOrder(data);
   };
   useEffect(() => {
@@ -67,6 +77,7 @@ export const UserDashboard = () => {
   }, [images]);
   useEffect(() => {}, [data]);
   useEffect(() => {
+    setCountries(countriesData);
     getOrders();
     refetchAllCart();
   }, []);
@@ -91,8 +102,25 @@ export const UserDashboard = () => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
   const handleSaveChangeClick = async (e) => {
-    await axios.put(`https://super-market-2ebn.onrender.com/api/users/update/${data.id}`, info);
-    setShow(false);
+    try {
+      await axios.put(
+        `https://super-market-2ebn.onrender.com/api/users/update/${data.id}`,
+        info
+      );
+      setShow(false);
+      NotificationManager.success(
+        "Save change successfully!",
+        "Account",
+        2000
+      );
+    } catch (error) {
+      NotificationManager.error(
+        "Save change failed!",
+        "Account",
+        2000
+      );
+    }
+    
   };
   const handleChangePasswordClick = async (e) => {
     if (confirmPassWord !== passWord) {
@@ -102,15 +130,35 @@ export const UserDashboard = () => {
         newPassword: passWord,
         oldPassword: oldPassWord,
       };
-      await axios.put(`https://super-market-2ebn.onrender.com/api/users/changePassWord/${data.id}`, passwords);
-      setShowChangePassword(false);
-      setMessage("");
+      try {
+        await axios.put(
+          `https://super-market-2ebn.onrender.com/api/users/changePassWord/${data.id}`,
+          passwords
+        );
+        NotificationManager.success(
+          "Password change successfully!",
+          "Change Password",
+          2000
+        );
+        setShowChangePassword(false);
+        setMessage("");
+      } catch (error) {
+        NotificationManager.error(
+          "Password change failed!",
+          "Change Password",
+          2000
+        );
+        
+      }
+      
     }
   };
   const handleChangeAvatar = async (e) => {
     setImages(e.target.files);
     try {
-      await axios.post(`https://super-market-2ebn.onrender.com/api/users/deleteImage/${data.id}`);
+      await axios.post(
+        `https://super-market-2ebn.onrender.com/api/users/deleteImage/${data.id}`
+      );
       const list = await Promise.all(
         Object.values(e.target.files).map(async (image) => {
           const data = new FormData();
@@ -129,15 +177,30 @@ export const UserDashboard = () => {
         photos: list[0],
       };
 
-      await axios.put(`https://super-market-2ebn.onrender.com/api/users/update/${data.id}`, photosUser);
+      await axios.put(
+        `https://super-market-2ebn.onrender.com/api/users/update/${data.id}`,
+        photosUser
+      );
+      NotificationManager.success(
+        "Avatar change successfully!",
+        "Change Avatar",
+        2000
+      );
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useFetch();
     } catch (error) {
+      NotificationManager.error(
+        "Avatar change failed!",
+        "Change Avatar",
+        2000
+      );
       console.log(error);
     }
   };
   const refetchAllCart = async () => {
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`);
+    const { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/cart/getAllCartByUser/${email}`
+    );
     let OrderPending = 0;
     const total = data.map((item) => {
       if (item.status === "PENDING") {
@@ -148,10 +211,10 @@ export const UserDashboard = () => {
     // OrderPending = total[total.length - 1];
     setTotalOrderPending(OrderPending);
   };
-  useEffect(() => {}, [showMenuMobile]);
+  useEffect(() => {}, [showMenuMobile, selectedCountry]);
   return (
     <>
-    {!loading && (
+      {!loading && (
         <div class="fullpage-loader">
           <span></span>
           <span></span>
@@ -586,6 +649,7 @@ export const UserDashboard = () => {
         tabindex="-1"
         aria-labelledby="exampleModalLabel2"
         aria-hidden="true"
+        style={{ zIndex: "100001" }}
       >
         <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
           <div class="modal-content">
@@ -692,27 +756,17 @@ export const UserDashboard = () => {
                         id="country"
                         aria-label="Floating label select example"
                         defaultValue={data.country}
-                        onChange={(e) => handleChange(e)}
+                        onChange={(e) => {
+                          handleChange(e);
+                          setSelectedCountry(e.target.value);
+                        }}
                       >
-                        <option selected>Choose Your Country</option>
-                        <option value="kindom">United Kingdom</option>
-                        <option value="states">United States</option>
-                        <option value="fra">France</option>
-                        <option value="china">China</option>
-                        <option value="spain">Spain</option>
-                        <option value="italy">Italy</option>
-                        <option value="turkey">Turkey</option>
-                        <option value="germany">Germany</option>
-                        <option value="russian">Russian Federation</option>
-                        <option value="malay">Malaysia</option>
-                        <option value="mexico">Mexico</option>
-                        <option value="austria">Austria</option>
-                        <option value="hong">Hong Kong SAR, China</option>
-                        <option value="ukraine">Ukraine</option>
-                        <option value="thailand">Thailand</option>
-                        <option value="saudi">Saudi Arabia</option>
-                        <option value="canada">Canada</option>
-                        <option value="singa">Singapore</option>
+                        <option>Choose Your Country</option>
+                        {countries.map((country, index) => (
+                          <option value={country.name} key={index}>
+                            {country.name}
+                          </option>
+                        ))}
                       </select>
                       <label for="country">Country</label>
                     </div>
@@ -728,14 +782,22 @@ export const UserDashboard = () => {
                         onChange={(e) => handleChange(e)}
                         defaultValue={data.city}
                       >
-                        <option selected>Choose Your City</option>
-                        <option value="kindom">India</option>
-                        <option value="states">Canada</option>
-                        <option value="fra">Dubai</option>
-                        <option value="china">Los Angeles</option>
-                        <option value="spain">Thailand</option>
+                        <option>Choose Your State</option>
+                        {selectedCountry !== "" && (
+                          <>
+                            {countries
+                              .find(
+                                (country) => country.name === selectedCountry
+                              )
+                              .states.map((state, index) => (
+                                <option key={index} value={state.name}>
+                                  {state.name}
+                                </option>
+                              ))}
+                          </>
+                        )}
                       </select>
-                      <label for="city">City</label>
+                      <label for="city">States</label>
                     </div>
                   </form>
                 </div>
@@ -787,6 +849,7 @@ export const UserDashboard = () => {
         tabindex="-1"
         aria-labelledby="exampleModalLabel2"
         aria-hidden="true"
+        style={{ zIndex: "100001" }}
       >
         <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
           <div class="modal-content">
@@ -881,11 +944,12 @@ export const UserDashboard = () => {
             ? "modal-backdrop fade show"
             : "modal-backdrop fade"
         }
+        style={{ zIndex: "100000" }}
       ></div>
       <div
         class={showMenuMobile ? "bg-overlay show" : "bg-overlay"}
         style={{ zIndex: "3" }}
-        onClick={()=>setShowMenuMobile(false)}
+        onClick={() => setShowMenuMobile(false)}
       ></div>
     </>
   );

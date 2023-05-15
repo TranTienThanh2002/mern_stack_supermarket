@@ -5,7 +5,9 @@ import { TrendingProductCard } from "../commons/trendingProductCard/trendingProd
 import { BiLeaf } from "react-icons/bi";
 import useFetch from "../../hooks/useFetch";
 export const OurBestSeller = () => {
-  const { data } = useFetch(`https://super-market-2ebn.onrender.com/api/product/get/productTopSales/limit/12`);
+  const { data } = useFetch(
+    `https://super-market-2ebn.onrender.com/api/product/get/productTopSales/limit/12`
+  );
   var settings = {
     dots: true,
     infinite: data.length > 4,
@@ -49,51 +51,57 @@ export const OurBestSeller = () => {
 
           <div class="best-selling-slider product-wrapper wow fadeInUp">
             <Slider {...settings}>
-              <div>
-                <ul class="product-list">
-                  {data.slice(0, 4).map((item, index) => (
-                    <li key={index}>
-                      <TrendingProductCard
-                        id={item._id}
-                        imageUrl={item.photos[0]}
-                        name={item.productname}
-                        kilo={item.weight[0]}
-                        price={item.discount}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <ul class="product-list">
-                  {data.slice(4, 8).map((item, index) => (
-                    <li key={index}>
-                      <TrendingProductCard
-                        id={item._id}
-                        imageUrl={item.photos[0]}
-                        name={item.productname}
-                        kilo={item.weight[0]}
-                        price={item.discount}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <ul class="product-list">
-                  {data.slice(8, 12).map((item, index) => (
-                    <li key={index}>
-                      <TrendingProductCard
-                        id={item._id}
-                        imageUrl={item.photos[0]}
-                        name={item.productname}
-                        kilo={item.weight[0]}
-                        price={item.discount}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {data.length >0 && (
+                <div>
+                  <ul class="product-list">
+                    {data.slice(0, 4).map((item, index) => (
+                      <li key={index}>
+                        <TrendingProductCard
+                          id={item._id}
+                          imageUrl={item.photos[0]}
+                          name={item.productname}
+                          kilo={item.weight[0]}
+                          price={item.discount}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {data.length > 4 && (
+                <div>
+                  <ul class="product-list">
+                    {data.slice(4, 8).map((item, index) => (
+                      <li key={index}>
+                        <TrendingProductCard
+                          id={item._id}
+                          imageUrl={item.photos[0]}
+                          name={item.productname}
+                          kilo={item.weight[0]}
+                          price={item.discount}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {data.length >8 && (
+                <div>
+                  <ul class="product-list">
+                    {data.slice(8, 12).map((item, index) => (
+                      <li key={index}>
+                        <TrendingProductCard
+                          id={item._id}
+                          imageUrl={item.photos[0]}
+                          name={item.productname}
+                          kilo={item.weight[0]}
+                          price={item.discount}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </Slider>
           </div>
         </>

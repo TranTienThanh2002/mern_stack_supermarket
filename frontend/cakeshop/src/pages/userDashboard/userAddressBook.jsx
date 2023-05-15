@@ -3,6 +3,7 @@ import { HiPlus } from "react-icons/hi";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
+import { NotificationManager } from "react-notifications";
 export const UserAddressBook = ({ id }) => {
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -22,10 +23,15 @@ export const UserAddressBook = ({ id }) => {
     try {
       await axios.post(`https://super-market-2ebn.onrender.com/api/address/`, address);
       const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/address/getByUserId/${id}`);
+      NotificationManager.success(
+        "Add address successfully!",
+        "Address",
+        2000
+      );
       setListAddress(data);
       setShow(false);
     } catch (error) {
-      console.log("userAddress");
+      console.log("userAddress: ", error);
     }
   };
   const handleEditClick = async (e, addressId) => {
@@ -44,7 +50,17 @@ export const UserAddressBook = ({ id }) => {
     try {
       const { data } = await axios.put(`https://super-market-2ebn.onrender.com/api/address/update/${addressId}`, info);
       setData(data);
+      NotificationManager.success(
+        "Update address successfully!",
+        "Address",
+        2000
+      );
     } catch (error) {
+      NotificationManager.error(
+        "Add address failed!",
+        "Address",
+        2000
+      );
       throw error;
     }
     setShowEdit(false);
@@ -59,7 +75,17 @@ export const UserAddressBook = ({ id }) => {
       await axios.put(`https://super-market-2ebn.onrender.com/api/address/deleteAddressInUser/${addressId}`, userId);
       const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/address/getByUserId/${id}`);
       setListAddress(data);
+      NotificationManager.success(
+        "Remove address successfully!",
+        "Address",
+        2000
+      );
     } catch (error) {
+      NotificationManager.success(
+        "Remove address failed!",
+        "Address",
+        2000
+      );
       console.log("remove address" + error);
     }
     setShowEdit(false);
@@ -200,6 +226,7 @@ export const UserAddressBook = ({ id }) => {
           tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
+          style={{zIndex: "100001"}}
         >
           <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
             <div class="modal-content">
@@ -351,6 +378,7 @@ export const UserAddressBook = ({ id }) => {
         class={
           show || showEdit ? "modal-backdrop fade show" : "modal-backdrop fade"
         }
+        style={{zIndex: "100000"}}
       ></div>
     </>
   );

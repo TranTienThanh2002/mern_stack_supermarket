@@ -5,6 +5,7 @@ import { MdClose } from "react-icons/md";
 import Slider from "react-slick";
 
 import { Ckeditor } from "../../components/ckeditor/ckeditor";
+import { NotificationManager } from "react-notifications";
 export const AddNewProduct = ({ show, setShow , store}) => {
   const [info, setInfo] = useState([]);
   const [weights, setWeights] = useState([]);
@@ -117,8 +118,18 @@ export const AddNewProduct = ({ show, setShow , store}) => {
       };
 
       await axios.post("https://super-market-2ebn.onrender.com/api/product", newProduct);
+      NotificationManager.success(
+        "Add new product successfully!",
+        "Products",
+        2000
+      );
       setShow(false)
     } catch (error) {
+      NotificationManager.error(
+        "Add new product failed!",
+        "Products",
+        2000
+      );
       console.log(error);
     }
   };
@@ -130,6 +141,7 @@ export const AddNewProduct = ({ show, setShow , store}) => {
         tabindex="-1"
         aria-labelledby="exampleModalLabel2"
         aria-hidden="true"
+        style={{zIndex: "100001"}}
       >
         <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
           <div class="modal-content">
@@ -343,7 +355,7 @@ export const AddNewProduct = ({ show, setShow , store}) => {
         </div>
       </div>
       <div
-        class={show ? "modal-backdrop fade show" : "modal-backdrop fade"}
+        class={show ? "modal-backdrop fade show" : "modal-backdrop fade"} style={{zIndex: "100000"}}
       ></div>
     </>
   );

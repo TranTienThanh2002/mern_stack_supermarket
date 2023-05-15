@@ -1,6 +1,7 @@
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-notifications/lib/notifications.css";
 import { Header } from "./components/headers/header";
 import { Home } from "./pages/home/home";
 import { Footer } from "./components/footers/footer";
@@ -25,13 +26,13 @@ import { Search } from "./pages/search/search";
 import { OrderSuccess } from "./pages/orderSuccess/ordersuccess";
 import { BecomeSeller } from "./pages/becomeSeller/becomeSeller";
 import { MenuMobile } from "./components/menuMobile/menuMobile";
-
+import { NotificationContainer } from "react-notifications";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Header />
-        <MenuMobile/>
+        <MenuMobile />
         <Routes>
           <Route exact path="*" element={<Page404 />} />
           <Route exact path="/" element={<Home />} />
@@ -59,6 +60,7 @@ function App() {
         <TapToTop />
         <Footer />
         <QuickView />
+        <NotificationContainer />
       </BrowserRouter>
     </>
   );

@@ -10,6 +10,7 @@ import axios from "axios";
 import { EditProduct } from "./editProduct";
 import { PaginationBasic } from "../../components/pagination/paginationOfSeller";
 import { usePaginationOfSellerContext } from "../../redux/contexts/paginationOfSeller/paginationOfSeller";
+import { NotificationManager } from "react-notifications";
 export const Product = () => {
   const [show, setShow] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
@@ -42,8 +43,23 @@ export const Product = () => {
     setAllProducts(data);
   };
   const handleClickDelete = async (id) => {
-    await axios.delete(`https://super-market-2ebn.onrender.com/api/product/delete/${id}/${store._id}`);
+    try {
+      await axios.delete(`https://super-market-2ebn.onrender.com/api/product/delete/${id}/${store._id}`);
+      NotificationManager.success(
+        "Remove product successfully!",
+        "Products",
+        2000
+      );
     reFetch();
+    } catch (error) {
+      NotificationManager.error(
+        "Remove product failed!",
+        "Products",
+        2000
+      );
+      console.log(error)
+    }
+    
   };
   const handleClickEdit = (id) => {
     setShowUpdate(true);

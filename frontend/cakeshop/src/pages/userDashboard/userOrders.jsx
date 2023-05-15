@@ -95,9 +95,9 @@ export const UserOrders = () => {
                         </Link>
 
                         <div class="order-wrap">
-                          <a href="product-left-thumbnail.html">
+                          <Link to={`/product/${item.id}`}>
                             <h3>{item.product.productname}</h3>
-                          </a>
+                          </Link>
                           {/* <p class="text-content">
                       Cheddar dolcelatte gouda. Macaroni cheese cheese
                       strings feta halloumi cottage cheese jarlsberg

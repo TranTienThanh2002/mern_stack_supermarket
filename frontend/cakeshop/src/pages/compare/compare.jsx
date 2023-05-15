@@ -1,10 +1,10 @@
 import React from "react";
 import { BreadCrumb } from "../../components/commons/breadCrumb/breadCrumb";
 import { useCompareContext } from "../../redux/contexts/compareContext/compareContext";
-import { Rating } from "@mui/material";
 import { useCartContext } from "../../redux/contexts/cartContexts/cartContext";
 import { Link } from "react-router-dom";
-import {BsTrash} from "react-icons/bs"
+import { BsTrash } from "react-icons/bs";
+import { NotificationManager } from "react-notifications";
 export const Compare = () => {
   const { compare, removeFromCompare } = useCompareContext();
   const { addToCart } = useCartContext();
@@ -72,42 +72,24 @@ export const Compare = () => {
                           ))}
                         </tr>
 
-                        {/* <tr>
-                          <th>Rating</th>
-                          {compare.map((item, index) => (
-                            <td key={index}>
-                              <Rating
-                                name="half-rating-read"
-                                defaultValue={4}
-                                value={4}
-                                readOnly
-                                size="small"
-                              />
-                            </td>
-                          ))}
-                        </tr>
-
-                        <tr>
-                          <th>Weight</th>
-                          {compare.map((item, index) => (
-                            <td key={index} class="text-content">
-                              {item.product.weight[0]}
-                            </td>
-                          ))}
-                        </tr> */}
-
                         <tr>
                           <th>Purchase</th>
                           {compare.map((item, index) => (
                             <td key={index}>
                               <button
                                 onClick={() =>
-                                  addToCart(
+                                  {addToCart(
                                     item.product._id,
                                     item.product.weight[0],
                                     1,
                                     item.product
                                   )
+                                  NotificationManager.success(
+                                    "Add to cart success",
+                                    "Cart products",
+                                    2000
+                                  );
+                                }
                                 }
                                 class=" btn-animation btn-sm w-100"
                               >
@@ -122,13 +104,17 @@ export const Compare = () => {
                           {compare.map((item, index) => (
                             <td
                               key={index}
-                              onClick={() =>
-                                removeFromCompare(item.product._id)
-                              }
+                              onClick={() => {
+                                removeFromCompare(item.product._id);
+                                NotificationManager.success(
+                                  "Remove success",
+                                  "Compare products",
+                                  2000
+                                );
+                              }}
                             >
                               <Link class="text-content remove_column">
-                                <BsTrash/>{" "}
-                                Remove
+                                <BsTrash /> Remove
                               </Link>
                             </td>
                           ))}

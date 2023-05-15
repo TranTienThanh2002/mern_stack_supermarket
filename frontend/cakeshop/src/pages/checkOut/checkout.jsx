@@ -9,14 +9,19 @@ import useFetch from "../../hooks/useFetch";
 import { HiPlus } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useUserContext } from "../../redux/contexts/loginContext/loginContext";
+import { NotificationManager } from "react-notifications";
 export const Checkout = () => {
   const [listAddress, setListAddress] = useState([]);
   const [addressChecked, setAddressChecked] = useState([]);
   defineElement(lottie.loadAnimation);
-  const { cart, setTotalItems, total_items, fee_shipping,removeItem } = useCartContext();
+  const { cart, setTotalItems, total_items, fee_shipping, removeItem } =
+    useCartContext();
   const email = localStorage.getItem("users");
-  const { data, loading } = useFetch(`https://super-market-2ebn.onrender.com/api/address/getByEmail/${email}`);
+  const { user } = useUserContext();
+  const { data, loading } = useFetch(
+    `https://super-market-2ebn.onrender.com/api/address/getByEmail/${email}`
+  );
   const navigate = useNavigate();
   var settings = {
     dots: true,
@@ -26,28 +31,36 @@ export const Checkout = () => {
     slidesToScroll: 2,
     centerMode: false,
     responsive: [
-      
       {
         breakpoint: 769,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          
-        }
+        },
       },
       {
         breakpoint: 426,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
   const handleCheckChange = (e, item) => {
     if (e.target.checked) {
       setAddressChecked(item);
+    }
+  };
+  const handleCheckProfile = async () => {
+    if (user.length > 0) {
+      navigate("/profile");
+    } else {
+      NotificationManager.warning(
+        "You don't have login!!!",
+        "Add address",
+        2000
+      );
     }
   };
   const handlePlaceOrder = async () => {
@@ -59,24 +72,34 @@ export const Checkout = () => {
       shipPing: fee_shipping,
       deliveryOption: "Standard Delivery Option",
       PaymentOption: "Cash On Delivery",
-      email: email
+      email: email,
     };
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         X_authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     };
     try {
-      const {data}= await axios.post("https://super-market-2ebn.onrender.com/api/cart/", order, config);
+      const { data } = await axios.post(
+        "https://super-market-2ebn.onrender.com/api/cart/",
+        order,
+        config
+      );
       localStorage.removeItem("CartStore");
       cart.map((item) => {
-        return removeItem(item.id)
-      })
-      navigate(`/orderSuccess/${data._id}`)
+        return removeItem(item.id);
+      });
+      NotificationManager.success(
+        "Place order successfully!",
+        "Checkout",
+        2000
+      );
+      navigate(`/orderSuccess/${data._id}`);
     } catch (error) {
+      NotificationManager.error("Place order failed!", "Checkout", 2000);
       console.log("add cart error: " + error);
-      navigate('/login')
+      navigate("/login");
     }
   };
   useEffect(() => {
@@ -92,6 +115,7 @@ export const Checkout = () => {
     };
     subTotalItem();
   }, []);
+  // useEffect(() => {}, [addressChecked]);
   return (
     <>
       <BreadCrumb title="Checkout" />
@@ -198,7 +222,7 @@ export const Checkout = () => {
                                     marginLeft: "12px",
                                     marginRight: "12px",
                                   }}
-                                  onClick={() => navigate("/profile")}
+                                  onClick={() => handleCheckProfile()}
                                 >
                                   <HiPlus className="me-2" />
                                   Add New Address
@@ -413,13 +437,26 @@ export const Checkout = () => {
                     </li>
                   </ul>
                 </div>
-
-                <button
-                  class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold"
-                  onClick={() => handlePlaceOrder()}
-                >
-                  Place Order
-                </button>
+                {listAddress.length > 0 ? (
+                  <>
+                    {addressChecked.hasOwnProperty("address") ? (
+                      <button
+                        class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold"
+                        onClick={() => handlePlaceOrder()}
+                      >
+                        Place Order
+                      </button>
+                    ) : (
+                      <div style={{ color: "red" }}>
+                        Choose address deliver!
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div style={{ color: "red" }}>
+                    Login and add address in my profile before checkout. Thanks!
+                  </div>
+                )}
               </div>
             </div>
           </div>

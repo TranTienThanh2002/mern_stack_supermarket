@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUserContext } from "../../redux/contexts/loginContext/loginContext";
 import { useGoogleLogin } from "@react-oauth/google";
+import { NotificationManager } from "react-notifications";
 export const Login = () => {
   const [info, setInfo] = useState([]);
   const [message, setMessage] = useState("");
@@ -32,8 +33,18 @@ export const Login = () => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${newUser.email}`, config);
       loginUser(data);
+      NotificationManager.success(
+        "Login success",
+        "Login",
+        2000
+      );
       navigate("/");
     } catch (error) {
+      NotificationManager.error(
+        "Login failed",
+        "Login",
+        2000
+      );
       setMessage("Email or password incorrect(Maybe account don't verify!");
       console.log("at login" + error);
     }
@@ -65,8 +76,20 @@ export const Login = () => {
         };
         var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${newUser.email}`, config);
         loginUser(data);
+        NotificationManager.success(
+          "Login success",
+          "Login",
+          2000
+        );
         navigate("/");
-      } catch (error) {console.log("login: ", error)}
+      } catch (error) {
+        NotificationManager.error(
+          "Login failed",
+          "Login",
+          2000
+        );
+        setMessage("Email invalid");
+        console.log("login: ", error)}
     },
   });
   const handleClickLoginGoogle = (e) => {

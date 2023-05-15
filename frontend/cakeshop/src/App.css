@@ -31259,10 +31259,10 @@ header .offcanvas-backdrop {
   font-size: 20px;
     display: flex;
 }
-.cart-section .cart-table table tbody tr td.product-detail .product .product-detail ul{
+/* .cart-section .cart-table table tbody tr td.product-detail .product .product-detail ul{
   width: 200px;
     overflow: auto;
-}
+} */
 canvas {
   width: 100% !important;
   height: 100% !important;
@@ -31296,7 +31296,25 @@ svg.feather.feather-search {
   .contact-box-section .right-sidebar-box .custom-form .custom-textarea .icon{
     font-size: 45px;
   }
+  .product-border.border-row .slick-slider .slick-list{
+    margin: 0 -2px;
+  }
 }
 .table-responsive-xl {
   overflow-x: auto;
+}
+.notification-success{
+  background-color: var(--theme-color) !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
+}
+.notification-warning{
+  background-color: #ffa53b !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
+}
+.notification-error{
+  background-color: #ff7272 !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
 }

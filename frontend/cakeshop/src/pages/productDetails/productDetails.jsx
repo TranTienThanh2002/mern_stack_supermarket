@@ -19,6 +19,10 @@ import { useCompareContext } from "../../redux/contexts/compareContext/compareCo
 import { useWishListContext } from "../../redux/contexts/wishlistContext/wishlistContext";
 import { usePaginationOfSellerContext } from "../../redux/contexts/paginationOfSeller/paginationOfSeller";
 import { PaginationBasic } from "../../components/pagination/paginationOfSeller";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 export const ProductDetails = () => {
   const [info, setInfo] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -46,7 +50,9 @@ export const ProductDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const { data, loading, error } = useFetch(`https://super-market-2ebn.onrender.com/api/product/${id}`);
+  const { data, loading, error } = useFetch(
+    `https://super-market-2ebn.onrender.com/api/product/${id}`
+  );
   const { page, limit, setPage } = usePaginationOfSellerContext();
   const itemWeight = useRef();
   const itemTabDes = useRef();
@@ -80,16 +86,60 @@ export const ProductDetails = () => {
     );
     setPageComment(data);
   };
+  const handleClickAddToCart = async () => {
+    try {
+      addToCart(data._id, weight, quantity, data)
+      NotificationManager.success(
+        "Add to cart success",
+        "Cart products",
+        2000
+      );
+    } catch (error) {
+      NotificationManager.error(
+        "Add to cart failed",
+        "Cart products",
+        2000
+      );
+    }
+  }
   const handleCompareClick = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
-    addToCompare(data);
-    navigate("/compare");
+    try {
+      const { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/product/${id}`
+      );
+      addToCompare(data);
+      navigate("/compare");
+      NotificationManager.success(
+        "Add to compare success",
+        "Compare products",
+        2000
+      );
+    } catch (error) {
+      NotificationManager.error(
+        "Add to compare failed",
+        "Compare products",
+        2000
+      );
+      NotificationManager.error(
+        error.message,
+        "Compare products",
+        2000
+      );
+    }
   };
   const handleWishlistClick = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
-    addWishlist(data);
+    try {
+      const { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/product/${id}`
+      );
+      addWishlist(data);
+      NotificationManager.success("Add to wishlist success", "Wishlist", 2000);
+    } catch (error) {
+      NotificationManager.success("Add to wishlist failed", "Wishlist", 2000);
+      NotificationManager.error(error.message, "Wishlist", 2000);
+    }
   };
   const handleClickTabDes = () => {
     const itemTabActive = itemTabDes.current;
@@ -118,10 +168,15 @@ export const ProductDetails = () => {
         user: JSON.stringify(userComment),
         productId: id,
       };
-      await axios.post("https://super-market-2ebn.onrender.com/api/comment/", comment);
+      await axios.post(
+        "https://super-market-2ebn.onrender.com/api/comment/",
+        comment
+      );
+      NotificationManager.success("Comment success", "Comment", 2000);
       getRating();
     } catch (error) {
       console.log("post comment failed: " + error);
+      NotificationManager.error("Comment failed", "Reply Comment", 2000);
     }
   };
   const handleClickReplyComment = async (e, commentId) => {
@@ -133,21 +188,31 @@ export const ProductDetails = () => {
         user: userComment.id,
         commentId: commentId,
       };
-      await axios.put("https://super-market-2ebn.onrender.com/api/comment/replyComment", comment);
+      await axios.put(
+        "https://super-market-2ebn.onrender.com/api/comment/replyComment",
+        comment
+      );
+      NotificationManager.success("Reply success", "Reply Comment", 2000);
       getRating();
     } catch (error) {
       console.log("post reply failed: " + error);
+      NotificationManager.error("Reply failed", "Reply Comment", 2000);
     }
   };
 
   const email = localStorage.getItem("users");
   const useFetchs = async () => {
     try {
-      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${email}`, config);
+      var { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/users/get/${email}`,
+        config
+      );
       setUserId(data.id);
       setUserComment(data);
       const storeId = data.store;
-      var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/store/getStore/${storeId}`);
+      var { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/store/getStore/${storeId}`
+      );
       setStore(data);
     } catch (error) {
       throw error;
@@ -155,29 +220,43 @@ export const ProductDetails = () => {
   };
 
   const getTopSales = async () => {
-    const { data } = await axios.get("https://super-market-2ebn.onrender.com/api/product/get/productTopSales");
+    const { data } = await axios.get(
+      "https://super-market-2ebn.onrender.com/api/product/get/productTopSales"
+    );
     setTopSale(data);
   };
   const getRating = async () => {
-    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getAllComment/${id}`);
+    var { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/comment/getAllComment/${id}`
+    );
     let all = data.length;
     setAllComment(data);
     if (data.length === 0) {
       all = 1;
     }
-    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/1`);
+    var { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/1`
+    );
     const one = data.length;
     setStar1((one / all).toFixed(2) * 100);
-    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/2`);
+    var { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/2`
+    );
     const two = data.length;
     setStar2((two / all).toFixed(2) * 100);
-    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/3`);
+    var { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/3`
+    );
     const three = data.length;
     setStar3((three / all).toFixed(2) * 100);
-    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/4`);
+    var { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/4`
+    );
     const four = data.length;
     setStar4((four / all).toFixed(2) * 100);
-    var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/5`);
+    var { data } = await axios.get(
+      `https://super-market-2ebn.onrender.com/api/comment/getRatingComment/${id}/5`
+    );
     const five = data.length;
     setStar5((five / all).toFixed(2) * 100);
     const average = (
@@ -208,12 +287,23 @@ export const ProductDetails = () => {
       const comment = {
         productId: id,
       };
-      await axios.delete(`https://super-market-2ebn.onrender.com/api/comment/deleteComment/${commentId}`);
-      await axios.post(`https://super-market-2ebn.onrender.com/api/comment/deleteCommentInProduct/${commentId}`, comment);
+      await axios.delete(
+        `https://super-market-2ebn.onrender.com/api/comment/deleteComment/${commentId}`
+      );
+      await axios.post(
+        `https://super-market-2ebn.onrender.com/api/comment/deleteCommentInProduct/${commentId}`,
+        comment
+      );
+      NotificationManager.warning(
+        "Delete comment success",
+        "Delete Comment",
+        2000
+      );
       // eslint-disable-next-line react-hooks/rules-of-hooks
       getRating();
     } catch (error) {
       console.log("delete comment failed: " + error);
+      NotificationManager.error("Delete comment fail", "Delete Comment", 2000);
     }
   };
   const handleClickDeleteReply = async (replyId, commentId) => {
@@ -222,9 +312,19 @@ export const ProductDetails = () => {
         commentId: commentId,
       };
 
-      await axios.post(`https://super-market-2ebn.onrender.com/api/comment/deleteReplyInComment/${replyId}`, comment);
-      await axios.delete(`https://super-market-2ebn.onrender.com/api/comment/deleteReply/${replyId}`);
+      await axios.post(
+        `https://super-market-2ebn.onrender.com/api/comment/deleteReplyInComment/${replyId}`,
+        comment
+      );
+      await axios.delete(
+        `https://super-market-2ebn.onrender.com/api/comment/deleteReply/${replyId}`
+      );
       // eslint-disable-next-line react-hooks/rules-of-hooks
+      NotificationManager.warning(
+        "Delete reply comment success",
+        "Delete Comment",
+        2000
+      );
       getRating();
     } catch (error) {
       console.log("delete comment failed: " + error);
@@ -236,10 +336,14 @@ export const ProductDetails = () => {
         ...info,
         commentId: commentId,
       };
-      await axios.put("https://super-market-2ebn.onrender.com/api/comment/updateComment/", comment);
+      await axios.put(
+        "https://super-market-2ebn.onrender.com/api/comment/updateComment/",
+        comment
+      );
       getRating();
     } catch (error) {
       console.log("post comment failed: " + error);
+      NotificationManager.error("Delete comment fail", "Delete Comment", 2000);
     }
   };
 
@@ -382,7 +486,7 @@ export const ProductDetails = () => {
                             // onclick="location.href = 'cart.html';"
                             class="btn btn-md bg-dark cart-button text-white w-100"
                             onClick={() =>
-                              addToCart(data._id, weight, quantity, data)
+                              handleClickAddToCart()
                             }
                           >
                             Add To Cart
@@ -1220,6 +1324,7 @@ export const ProductDetails = () => {
           />
         </>
       )}
+      <NotificationContainer />
     </>
   );
 };

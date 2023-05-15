@@ -2,13 +2,29 @@ import React, { useState } from "react";
 import { BreadCrumb } from "../../components/commons/breadCrumb/breadCrumb";
 import forgot from "../../assets/images/inner-page/forgot.png";
 import axios from "axios";
+import { NotificationManager } from "react-notifications";
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const handleClick = async (e) => {
     e.preventDefault();
-    await axios.get(`https://super-market-2ebn.onrender.com/api/users/reset/${email}`);
+    try {
+      await axios.get(`https://super-market-2ebn.onrender.com/api/users/reset/${email}`);
+    NotificationManager.success(
+      "Send email successfully!",
+      "ForgotPassword",
+      2000
+    );
     setMessage("Send email successfully!")
+    } catch (error) {
+      NotificationManager.error(
+        "Send email failed!",
+        "ForgotPassword",
+        2000
+      );
+      setMessage("Check your email address!")
+    }
+    
   };
   return (
     <>

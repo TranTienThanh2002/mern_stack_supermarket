@@ -4,7 +4,7 @@ import Rating from "@mui/material/Rating";
 import { useCartContext } from "../../../redux/contexts/cartContexts/cartContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { NotificationManager } from "react-notifications";
 export const ProductDetails = ({ item, spanName, unit, background }) => {
   const [showQuantity, setShowQuantity] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -42,6 +42,7 @@ export const ProductDetails = ({ item, spanName, unit, background }) => {
   useEffect(() => {
     if (showQuantity) {
       addToCart(item._id, item.weight[0], quantity, item);
+      NotificationManager.success("Add to cart success", "Cart products", 2000);
     }
   }, [quantity]);
   return (

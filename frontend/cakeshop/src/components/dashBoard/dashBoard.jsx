@@ -267,26 +267,6 @@ export const DashBoard = () => {
                                     </div>
                                   </div>
                                 </div>
-
-                                {/* <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
-                                  <div class="totle-contain">
-                                    <img
-                                      src="https://themes.pixelstrap.com/fastkart/assets/images/svg/pending.svg"
-                                      class="img-1 blur-up lazyload"
-                                      alt=""
-                                    />
-                                    <img
-                                      src="https://themes.pixelstrap.com/fastkart/assets/images/svg/pending.svg"
-                                      class="blur-up lazyload"
-                                      alt=""
-                                    />
-                                    <div class="totle-detail">
-                                      <h5>Total Sales</h5>
-                                      <h3>12550</h3>
-                                    </div>
-                                  </div>
-                                </div> */}
-
                                 <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
                                   <div class="totle-contain">
                                     <img

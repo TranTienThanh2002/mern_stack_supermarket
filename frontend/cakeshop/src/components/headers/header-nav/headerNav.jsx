@@ -182,7 +182,8 @@ export const HeaderNav = ({showNavBarMobile, setShowNavBarMobile}) => {
               <div class="offcanvas-body">
                 <ul class="navbar-nav">
                   <li class="nav-item dropdown">
-                    <Link class="nav-link dropdown-toggle" to="/">
+                    <Link class="nav-link dropdown-toggle" to="/"
+                    onClick={()=>setShowNavBarMobile(false)}>
                       Home
                     </Link>
                   </li>
@@ -192,6 +193,7 @@ export const HeaderNav = ({showNavBarMobile, setShowNavBarMobile}) => {
                       class="nav-link dropdown-toggle "
                       to="/shop"
                       data-bs-toggle="dropdown"
+                      onClick={()=>setShowNavBarMobile(false)}
                     >
                       Shop
                     </Link>
@@ -201,6 +203,7 @@ export const HeaderNav = ({showNavBarMobile, setShowNavBarMobile}) => {
                       class="nav-link dropdown-toggle "
                       to="/contact"
                       data-bs-toggle="dropdown"
+                      onClick={()=>setShowNavBarMobile(false)}
                     >
                       Contact Us
                     </Link>
@@ -210,6 +213,7 @@ export const HeaderNav = ({showNavBarMobile, setShowNavBarMobile}) => {
                       class="nav-link dropdown-toggle "
                       to="/wishlist"
                       data-bs-toggle="dropdown"
+                      onClick={()=>setShowNavBarMobile(false)}
                     >
                       Wishlist
                     </Link>
@@ -219,6 +223,7 @@ export const HeaderNav = ({showNavBarMobile, setShowNavBarMobile}) => {
                       class="nav-link dropdown-toggle "
                       to="/compare"
                       data-bs-toggle="dropdown"
+                      onClick={()=>setShowNavBarMobile(false)}
                     >
                       Compare
                     </Link>
@@ -229,7 +234,7 @@ export const HeaderNav = ({showNavBarMobile, setShowNavBarMobile}) => {
               </div>
              
             </div>
-            <div class={showNavBarMobile ? "offcanvas-backdrop fade show":"offcanvas-backdrop fade hide-offcanvas"} style={{zIndex: "1"}}></div>
+            <div class={showNavBarMobile ? "offcanvas-backdrop fade show":"offcanvas-backdrop fade hide-offcanvas"} style={{zIndex: "1"}} onClick={()=>setShowNavBarMobile(false)}></div>
           </div>
         </div>
 

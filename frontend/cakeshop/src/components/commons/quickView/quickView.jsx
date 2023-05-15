@@ -53,7 +53,7 @@ export const QuickView = () => {
                       <div class="right-sidebar-modal">
                         <h4 class="title-name">{data.productname}</h4>
                         <h4 class="price">${data.discount}</h4>
-                        <div class="product-rating">
+                        {/* <div class="product-rating">
                           <Rating
                             name="half-rating-read"
                             defaultValue={4}
@@ -65,35 +65,14 @@ export const QuickView = () => {
                           <span class="ms-2 text-danger">
                             6 sold in last 16 hours
                           </span>
-                        </div>
+                        </div> */}
 
                         <div class="product-detail">
                           <h4>Product Details :</h4>
                           <p>{data.sortdesc}</p>
                         </div>
 
-                        <ul class="brand-list">
-                          <li>
-                            <div class="brand-box">
-                              <h5>Brand Name:</h5>
-                              <h6>Black Forest</h6>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="brand-box">
-                              <h5>Product Code:</h5>
-                              <h6>W0690034</h6>
-                            </div>
-                          </li>
-
-                          <li>
-                            <div class="brand-box">
-                              <h5>Product Type:</h5>
-                              <h6>White Cream Cake</h6>
-                            </div>
-                          </li>
-                        </ul>
+                        
 
                         <div class="select-size">
                           <h4>Cake Size :</h4>

@@ -345,7 +345,7 @@ export const LeftBox = ({ setData, setShowFilterMobile, showFilterMobile }) => {
               </div>
             </div>
 
-            <div class="accordion-item">
+            {/* <div class="accordion-item">
               <h2 class="accordion-header" id="headingSix">
                 <button
                   class="accordion-button collapsed"
@@ -932,7 +932,7 @@ export const LeftBox = ({ setData, setShowFilterMobile, showFilterMobile }) => {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

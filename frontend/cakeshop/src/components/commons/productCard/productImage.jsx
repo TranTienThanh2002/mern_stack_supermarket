@@ -7,7 +7,7 @@ import { useCompareContext } from "../../../redux/contexts/compareContext/compar
 import useFetch from "../../../hooks/useFetch";
 import { useWishListContext } from "../../../redux/contexts/wishlistContext/wishlistContext";
 import axios from "axios";
-
+import { NotificationManager } from "react-notifications";
 export const ProductImage = ({ imageUrl, id }) => {
   const { showQuickView } = useQuickViewContext();
   const { addToCompare } = useCompareContext();
@@ -18,15 +18,46 @@ export const ProductImage = ({ imageUrl, id }) => {
   const handleClick = () => {
     showQuickView(id, true);
   };
-  const handleCompareClick = async() => {
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
+  const handleCompareClick = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/product/${id}`
+      );
       addToCompare(data);
       navigate("/compare");
+      NotificationManager.success(
+        "Add to compare success",
+        "Compare products",
+        2000
+      );
+    } catch (error) {
+      NotificationManager.error(
+        "Add to compare failed",
+        "Compare products",
+        2000
+      );
+      NotificationManager.error(
+        error.message,
+        "Compare products",
+        2000
+      );
+    }
   };
-  const handleWishlistClick = async() => {
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
-    addWishlist(data);
+  const handleWishlistClick = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/product/${id}`
+      );
+      addWishlist(data);
+      NotificationManager.success("Add to wishlist success", "Wishlist", 2000);
+    } catch (error) {
+      NotificationManager.success("Add to wishlist failed", "Wishlist", 2000);
+      NotificationManager.error(error.message, "Wishlist", 2000);
+    }
   };
+
 
   return (
     <>
@@ -50,7 +81,7 @@ export const ProductImage = ({ imageUrl, id }) => {
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="Compare"
-            onClick={() => handleCompareClick()}
+            onClick={(e) => handleCompareClick(e)}
           >
             <Link>
               <MdLoop />
@@ -61,7 +92,7 @@ export const ProductImage = ({ imageUrl, id }) => {
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="Wishlist"
-            onClick={() => handleWishlistClick()}
+            onClick={(e) => handleWishlistClick(e)}
           >
             <Link class="notifi-wishlist">
               <FiHeart />

@@ -7,6 +7,7 @@ import { useCartContext } from "../../../redux/contexts/cartContexts/cartContext
 import { useWishListContext } from "../../../redux/contexts/wishlistContext/wishlistContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { NotificationManager } from "react-notifications";
 export const StickCardBox = ({ data, quantity, setQuantity }) => {
   const [visible, setVisible] = useState(false);
   const { addToCart } = useCartContext();
@@ -24,10 +25,28 @@ export const StickCardBox = ({ data, quantity, setQuantity }) => {
     }
   };
   window.addEventListener("scroll", toggleVisible);
-  const handleWishlistClick = async (e, id) => {
+  const handleClickAddToCart = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/product/${id}`);
-    addWishlist(data);
+    try {
+      addToCart(data._id, "", quantity, data);
+      NotificationManager.success("Add to cart success", "Cart products", 2000);
+    } catch (error) {
+      NotificationManager.error("Add to cart failed", "Cart products", 2000);
+    }
+  };
+  const handleWishlistClick = async (e) => {
+    e.preventDefault();
+    try {
+      const id = data._id;
+      var { data } = await axios.get(
+        `https://super-market-2ebn.onrender.com/api/product/${id}`
+      );
+      addWishlist(data);
+      NotificationManager.success("Add to wishlist success", "Wishlist", 2000);
+    } catch (error) {
+      NotificationManager.success("Add to wishlist failed", "Wishlist", 2000);
+      NotificationManager.error(error.message, "Wishlist", 2000);
+    }
   };
   return (
     <>
@@ -118,7 +137,7 @@ export const StickCardBox = ({ data, quantity, setQuantity }) => {
                     class="btn theme-bg-color text-white"
                     onClick={(e) => {
                       e.preventDefault();
-                      addToCart(data._id, "", quantity, data);
+                      handleClickAddToCart(e);
                     }}
                   >
                     <FaShoppingCart

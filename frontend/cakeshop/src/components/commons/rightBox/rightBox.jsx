@@ -107,7 +107,7 @@ export const RightBox = ({
         page: page,
         limit: limit,
       };
-      if (sortBy.sortBy["tag"] === "productname") {
+      if (sortBy?.sortBy["tag"] === "productname") {
         var { data } = await axios.post("https://super-market-2ebn.onrender.com/api/product/filter/name", fillterProduct);
         setDatas(data);
         var { data } = await axios.post(
@@ -115,7 +115,7 @@ export const RightBox = ({
           fillterProduct
         );
         setProducts(data);
-      } else if (sortBy.sortBy["tag"] === "price") {
+      } else if (sortBy?.sortBy["tag"] === "price") {
         var { data } = await axios.post(
           "https://super-market-2ebn.onrender.com/api/product/filter/price",
           fillterProduct

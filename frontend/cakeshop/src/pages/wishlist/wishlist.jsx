@@ -5,8 +5,10 @@ import { useWishListContext } from "../../redux/contexts/wishlistContext/wishlis
 import { ProductDetails } from "../../components/commons/productCard/productDetails";
 import { MdClose } from "react-icons/md";
 import Slider from "react-slick";
+import { NotificationManager } from "react-notifications";
 export const Wishlist = () => {
   const { wishlistItems, removeWishlist } = useWishListContext();
+
   var settings = {
     dots: true,
     infinite: wishlistItems.length > 6,
@@ -20,26 +22,23 @@ export const Wishlist = () => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 4,
-          
-        }
+        },
       },
       {
         breakpoint: 769,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          
-        }
+        },
       },
       {
         breakpoint: 426,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
   return (
     <>
@@ -70,7 +69,13 @@ export const Wishlist = () => {
                               <button class="btn wishlist-button close_button">
                                 <MdClose
                                   onClick={() =>
-                                    removeWishlist(item.product._id)
+                                    {removeWishlist(item.product._id)
+                                      NotificationManager.success(
+                                        "Remove success",
+                                        "Wishlist products",
+                                        2000
+                                      );
+                                    }
                                   }
                                 />
                               </button>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
+import { NotificationManager } from "react-notifications";
 export const Settings = ({store, userId}) => {
   const config = {
     headers: {
@@ -8,10 +9,25 @@ export const Settings = ({store, userId}) => {
       X_authorization: "Bearer " + localStorage.getItem("accessToken"),
     },
   };
+  const navigate = useNavigate();
   const handleClickDeleteAccount = async() => {
-
-    await axios.delete(`https://super-market-2ebn.onrender.com/api/store/deleteStore/${store._id}/${userId}`, config)
-    // navigate('/')
+    try {
+      await axios.delete(`https://super-market-2ebn.onrender.com/api/store/deleteStore/${store._id}/${userId}`, config)
+      NotificationManager.success(
+        "Delete Store successfully!",
+        "Settings",
+        2000
+      );
+      navigate('/')
+      
+    } catch (error) {
+      NotificationManager.error(
+        "Delete Store failed!",
+        "Settings",
+        2000
+      );
+      console.log(error)
+    }
   }
   return (
     <>

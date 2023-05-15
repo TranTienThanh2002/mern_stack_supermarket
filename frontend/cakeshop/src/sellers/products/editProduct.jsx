@@ -8,7 +8,7 @@ import { Ckeditor } from "../../components/ckeditor/ckeditor";
 import useFetch from "../../hooks/useFetch";
 
 // import env from "react-dotenv";
-
+import { NotificationManager } from "react-notifications";
 export const EditProduct = ({ show, setShow, id, store }) => {
   const [info, setInfo] = useState([]);
   const [weights, setWeights] = useState([]);
@@ -135,8 +135,18 @@ export const EditProduct = ({ show, setShow, id, store }) => {
       }
 
       await axios.put(`https://super-market-2ebn.onrender.com/api/product/update/${id}`, editProduct);
+      NotificationManager.success(
+        "Update product successfully!",
+        "Products",
+        2000
+      );
       setShow(false);
     } catch (error) {
+      NotificationManager.error(
+        "Update product failed!",
+        "Products",
+        2000
+      );
       console.log("editProduct " + error);
     }
   };
@@ -152,6 +162,7 @@ export const EditProduct = ({ show, setShow, id, store }) => {
             tabindex="-1"
             aria-labelledby="exampleModalLabel2"
             aria-hidden="true"
+            style={{zIndex: "100001"}}
           >
             <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
               <div class="modal-content">
@@ -382,7 +393,7 @@ export const EditProduct = ({ show, setShow, id, store }) => {
             </div>
           </div>
           <div
-            class={show ? "modal-backdrop fade show" : "modal-backdrop fade"}
+            class={show ? "modal-backdrop fade show" : "modal-backdrop fade"} style={{zIndex: "100001"}}
           ></div>
         </>
       )}

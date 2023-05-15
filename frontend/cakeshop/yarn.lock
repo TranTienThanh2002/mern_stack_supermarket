@@ -3107,6 +3107,11 @@
   "resolved" "https://registry.npmjs.org/acorn/-/acorn-7.4.1.tgz"
   "version" "7.4.1"
 
+"acorn@6.4.1":
+  "integrity" "sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA=="
+  "resolved" "https://registry.npmjs.org/acorn/-/acorn-6.4.1.tgz"
+  "version" "6.4.1"
+
 "address@^1.0.1", "address@^1.1.2":
   "integrity" "sha512-4B/qKCfeE/ODUaAUpSwfzazo5x29WD4r3vXiWsB7I2mSDAihwEqKO+g8GELZUQSSAo5e1XTYh3ZVfLyxBc12nA=="
   "resolved" "https://registry.npmjs.org/address/-/address-1.2.2.tgz"
@@ -4068,7 +4073,7 @@
     "@ckeditor/ckeditor5-watchdog" "^37.0.1"
     "@ckeditor/ckeditor5-widget" "^37.0.1"
 
-"classnames@^2.2.5", "classnames@^2.3.1":
+"classnames@^2.1.1", "classnames@^2.2.5", "classnames@^2.3.1":
   "integrity" "sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw=="
   "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
   "version" "2.3.2"
@@ -7353,6 +7358,11 @@
   "resolved" "https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz"
   "version" "0.5.0"
 
+"json-loader@^0.5.7":
+  "integrity" "sha512-QLPs8Dj7lnf3e3QYS1zkCo+4ZwqOiF9d/nZnYozTISxXWCfNs9yuky5rJw4/W34s7POaNlbZmQGaB5NiXCbP4w=="
+  "resolved" "https://registry.npmjs.org/json-loader/-/json-loader-0.5.7.tgz"
+  "version" "0.5.7"
+
 "json-parse-even-better-errors@^2.3.0", "json-parse-even-better-errors@^2.3.1":
   "integrity" "sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w=="
   "resolved" "https://registry.npmjs.org/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz"
@@ -9047,7 +9057,7 @@
     "react-is" "^16.3.2"
     "warning" "^4.0.0"
 
-"prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
+"prop-types@^15.5.10", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -9320,6 +9330,16 @@
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
+"react-notifications@^1.7.4":
+  "integrity" "sha512-dsR7mUQfe8YdFLqVsjT0GFd4n26UWkzefdjMELfEVygjuuyU6ZZ0LpZhFHdfmraGeBFLWHNxygpGlHHituUyjQ=="
+  "resolved" "https://registry.npmjs.org/react-notifications/-/react-notifications-1.7.4.tgz"
+  "version" "1.7.4"
+  dependencies:
+    "acorn" "6.4.1"
+    "classnames" "^2.1.1"
+    "prop-types" "^15.5.10"
+    "react-transition-group" "^4.4.1"
+
 "react-range-slider-input@^3.0.7":
   "integrity" "sha512-yAJDDMUNkILOcZSCLCVbwgnoAM3v0AfdDysTCMXDwY/+ZRNRlv98TyHbVCwPFEd7qiI8Ca/stKb0GAy//NybYw=="
   "resolved" "https://registry.npmjs.org/react-range-slider-input/-/react-range-slider-input-3.0.7.tgz"
@@ -9426,7 +9446,7 @@
     "lodash.debounce" "^4.0.8"
     "resize-observer-polyfill" "^1.5.0"
 
-"react-transition-group@^4.4.2", "react-transition-group@^4.4.5":
+"react-transition-group@^4.4.1", "react-transition-group@^4.4.2", "react-transition-group@^4.4.5":
   "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"
   "version" "4.4.5"

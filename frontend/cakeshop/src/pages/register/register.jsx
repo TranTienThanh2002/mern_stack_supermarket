@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useUserContext } from "../../redux/contexts/loginContext/loginContext";
+import { NotificationManager } from "react-notifications";
 export const Register = () => {
   const [info, setInfo] = useState([]);
   const [message, setMessage] = useState("");
@@ -20,8 +21,19 @@ export const Register = () => {
     try {
       const newUser = { ...info };
       await axios.post("https://super-market-2ebn.onrender.com/api/users", newUser);
-      setMessage("Please verify account");
+      NotificationManager.success(
+        "Sign up successfully!",
+        "Register",
+        2000
+      );
+      setMessage("Please verify account by your email!");
     } catch (error) {
+      NotificationManager.error(
+        "Sign up failed!",
+        "Register",
+        2000
+      );
+      setMessage("Account already exists!");
       console.log("at register" + error);
     }
   };
@@ -55,8 +67,20 @@ export const Register = () => {
         };
         var { data } = await axios.get(`https://super-market-2ebn.onrender.com/api/users/get/${newUser.email}`, config);
         loginUser(data);
+        NotificationManager.success(
+          "Sign up successfully!",
+          "Register",
+          2000
+        );
         navigate("/");
-      } catch (error) {console.log("sign up: ", error)}
+      } catch (error) {
+        NotificationManager.error(
+          "Sign up failed!",
+          "Register",
+          2000
+        );
+        setMessage("Account already exists!");
+        console.log("sign up: ", error)}
     },
   });
   const handleClickSignUpGoogle = (e) => {
