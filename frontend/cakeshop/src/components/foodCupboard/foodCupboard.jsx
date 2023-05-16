@@ -7,7 +7,6 @@ import { BiLeaf } from "react-icons/bi";
 export const FoodCupboard = () => {
   const { data, loading, error, reFetch } = useFetch("https://super-market-2ebn.onrender.com/api/product");
   var settings = {
-    dots: true,
     infinite: data.length > 3,
     speed: 500,
     slidesToShow: 4,
