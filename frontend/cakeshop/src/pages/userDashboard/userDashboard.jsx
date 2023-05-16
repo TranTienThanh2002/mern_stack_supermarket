@@ -108,19 +108,10 @@ export const UserDashboard = () => {
         info
       );
       setShow(false);
-      NotificationManager.success(
-        "Save change successfully!",
-        "Account",
-        2000
-      );
+      NotificationManager.success("Save change successfully!", "Account", 2000);
     } catch (error) {
-      NotificationManager.error(
-        "Save change failed!",
-        "Account",
-        2000
-      );
+      NotificationManager.error("Save change failed!", "Account", 2000);
     }
-    
   };
   const handleChangePasswordClick = async (e) => {
     if (confirmPassWord !== passWord) {
@@ -148,9 +139,7 @@ export const UserDashboard = () => {
           "Change Password",
           2000
         );
-        
       }
-      
     }
   };
   const handleChangeAvatar = async (e) => {
@@ -189,11 +178,7 @@ export const UserDashboard = () => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useFetch();
     } catch (error) {
-      NotificationManager.error(
-        "Avatar change failed!",
-        "Change Avatar",
-        2000
-      );
+      NotificationManager.error("Avatar change failed!", "Change Avatar", 2000);
       console.log(error);
     }
   };
@@ -554,11 +539,15 @@ export const UserDashboard = () => {
                             <div class="col-xxl-6">
                               <div class="dashboard-contant-title">
                                 <h4>
-                                  Newsletters{" "}
+                                  Address Book{" "}
                                   <Link
                                     data-bs-toggle="modal"
                                     data-bs-target="#editProfile"
-                                    // onClick={(e) => handleEditClick(e)}
+                                    onClick={(e) => {
+                                      switchPage();
+                                      setAddress(true);
+                                      scrollTop();
+                                    }}
                                   >
                                     Edit
                                   </Link>
@@ -566,66 +555,16 @@ export const UserDashboard = () => {
                               </div>
                               <div class="dashboard-detail">
                                 <h6 class="text-content">
-                                  You are currently not subscribed to any
-                                  newsletter
+                                  Default Billing Address
                                 </h6>
+                                <h6 class="text-content">
+                                  You have not set a default billing address.
+                                </h6>
+                                
                               </div>
                             </div>
 
-                            <div class="col-12">
-                              <div class="dashboard-contant-title">
-                                <h4>
-                                  Address Book{" "}
-                                  <Link
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#editProfile"
-                                    onClick={(e) => handleEditClick(e)}
-                                  >
-                                    Edit
-                                  </Link>
-                                </h4>
-                              </div>
-
-                              <div class="row g-4">
-                                <div class="col-xxl-6">
-                                  <div class="dashboard-detail">
-                                    <h6 class="text-content">
-                                      Default Billing Address
-                                    </h6>
-                                    <h6 class="text-content">
-                                      You have not set a default billing
-                                      address.
-                                    </h6>
-                                    <Link
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#editProfile"
-                                      onClick={(e) => handleEditClick(e)}
-                                    >
-                                      Edit Address
-                                    </Link>
-                                  </div>
-                                </div>
-
-                                <div class="col-xxl-6">
-                                  <div class="dashboard-detail">
-                                    <h6 class="text-content">
-                                      Default Shipping Address
-                                    </h6>
-                                    <h6 class="text-content">
-                                      You have not set a default shipping
-                                      address.
-                                    </h6>
-                                    <Link
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#editProfile"
-                                      onClick={(e) => handleEditClick(e)}
-                                    >
-                                      Edit Address
-                                    </Link>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            
                           </div>
                         </div>
                       </>

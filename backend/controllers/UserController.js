@@ -1163,7 +1163,7 @@ export const Verify = async (req, res, next) => {
       }
     );
     // res.status(200).json(updatedUser);
-    res.redirect("https://bejewelled-eclair-5a4618.netlify.app/");
+    res.redirect("https://vermillion-tulumba-0e1843.netlify.app/");
   } catch (error) {
     next(error);
   }

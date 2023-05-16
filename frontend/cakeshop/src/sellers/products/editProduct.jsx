@@ -393,7 +393,7 @@ export const EditProduct = ({ show, setShow, id, store }) => {
             </div>
           </div>
           <div
-            class={show ? "modal-backdrop fade show" : "modal-backdrop fade"} style={{zIndex: "100001"}}
+            class={show ? "modal-backdrop fade show" : "modal-backdrop fade"} style={{zIndex: "100000"}}
           ></div>
         </>
       )}
